@@ -1,0 +1,1928 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mauro Agustín Romero — Desarrollador Full Stack · Caso de estudio: ShoppingOnline</title>
+
+<meta name="description" content="Portfolio técnico de Mauro Agustín Romero, desarrollador full stack. Caso de estudio completo de ShoppingOnlineSN, un marketplace para emprendedores.">
+
+<!-- Open Graph / Twitter Card — cómo se ve el link al compartirlo.
+     Pendiente: completar "og:url" (y el "url" de los datos estructurados
+     más abajo) con la URL real una vez publicado en Vercel, y sumar
+     "og:image" con una captura o foto. -->
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Mauro Agustín Romero — Desarrollador Full Stack">
+<meta property="og:description" content="Caso de estudio técnico de ShoppingOnlineSN: arquitectura, base de datos, decisiones y problemas reales resueltos.">
+<meta property="og:url" content="">
+<meta property="og:locale" content="es_AR">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mauro Agustín Romero — Desarrollador Full Stack">
+<meta name="twitter:description" content="Caso de estudio técnico de ShoppingOnlineSN: arquitectura, base de datos, decisiones y problemas reales resueltos.">
+
+<!-- Datos estructurados (Person) — mismo criterio que el sitio de
+     ShoppingOnline usa para sus tiendas (ver sección 02, Arquitectura). -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Mauro Agustín Romero",
+  "jobTitle": "Desarrollador Full Stack",
+  "url": "",
+  "sameAs": [
+    "https://github.com/romeromauro11"
+  ]
+}
+</script>
+<!-- Nota: estos datos deben coincidir con los de la sección Contacto -->
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- =================================================================
+     SPRITE DE ÍCONOS — un solo lugar para editar cada ícono.
+     Se referencian en el resto del HTML con:
+       <svg class="icon"><use href="#icon-nombre"></use></svg>
+     Para agregar un ícono nuevo: sumá un <symbol> acá con un id
+     nuevo y usalo donde haga falta. No se ve en pantalla (sr-sprite).
+     ================================================================= -->
+<svg class="sr-sprite" aria-hidden="true" focusable="false">
+  <symbol id="icon-camera" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+    <rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7l1.4-2.4A2 2 0 0 1 11.1 3.6h1.8a2 2 0 0 1 1.7 1L16 7"/><circle cx="12" cy="13.5" r="3.2"/>
+  </symbol>
+  <symbol id="icon-external" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M7 17L17 7M9 7h8v8"/>
+  </symbol>
+  <symbol id="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M6 6l12 12M18 6L6 18"/>
+  </symbol>
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M5 12h14M13 6l6 6-6 6"/>
+  </symbol>
+  <symbol id="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M4 7h16M4 12h16M4 17h16"/>
+  </symbol>
+  <symbol id="icon-arrow-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M12 19V5M5 12l7-7 7 7"/>
+  </symbol>
+  <symbol id="icon-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+    <rect x="8" y="8" width="12" height="12" rx="1.5"/><path d="M16 8V5.5A1.5 1.5 0 0 0 14.5 4h-9A1.5 1.5 0 0 0 4 5.5v9A1.5 1.5 0 0 0 5.5 16H8"/>
+  </symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M5 13l4 4L19 7"/>
+  </symbol>
+</svg>
+
+<a class="skip-link" href="#top">Saltar al contenido</a>
+
+<div class="progress-line"></div>
+
+<!-- =================================================================
+     HEADER
+     ================================================================= -->
+<header class="site-header">
+  <a href="#top" class="brand">Mauro<span>.dev</span></a>
+ 
+  <div class="header-actions">
+    <button class="nav-toggle" aria-label="Abrir navegación" aria-expanded="false" aria-controls="docNav">
+      <svg class="icon" aria-hidden="true"><use href="#icon-menu"></use></svg>
+    </button>
+  </div>
+</header>
+
+<!-- Fondo oscuro detrás del menú móvil — click afuera para cerrar.
+     Solo se ve en mobile, mientras el menú está abierto (ver main.js). -->
+<div class="nav-backdrop" id="navBackdrop" hidden></div>
+
+<!-- =================================================================
+     DOC NAV — índice lateral fijo (estilo documentación)
+     Para agregar una sección nueva: copiá un <li> y ajustá el href
+     y el texto. El número es solo texto, no se genera automático.
+     ================================================================= -->
+<nav class="doc-nav" id="docNav" aria-label="Índice del caso de estudio">
+  <p class="doc-nav-title">Índice</p>
+  <ul>
+    <li><a href="#sobre-el-proyecto"><span class="n">01</span> Sobre el proyecto</a></li>
+    <li><a href="#arquitectura"><span class="n">02</span> Arquitectura</a></li>
+    <li><a href="#frontend"><span class="n">03</span> Frontend</a></li>
+    <li><a href="#vendedores"><span class="n">04</span> Vendedores</a></li>
+    <li><a href="#admin"><span class="n">05</span> Panel admin</a></li>
+    <li><a href="#base-de-datos"><span class="n">06</span> Base de datos</a></li>
+    <li><a href="#funcionalidades"><span class="n">07</span> Funcionalidades</a></li>
+    <li><a href="#decisiones"><span class="n">08</span> Decisiones técnicas</a></li>
+    <li><a href="#problemas-soluciones"><span class="n">09</span> Problemas</a></li>
+    <li><a href="#evolucion"><span class="n">10</span> Evolución</a></li>
+    <li><a href="#evidencia"><span class="n">11</span> Evidencia técnica</a></li>
+    <li><a href="#otros-proyectos"><span class="n">12</span> Otros proyectos</a></li>
+  </ul>
+  <hr class="doc-nav-divider">
+  <ul>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+</nav>
+
+<main id="top">
+
+  <!-- ===============================================================
+       HERO
+       =============================================================== -->
+  <section class="hero wrap">
+    <div class="hero-kicker">
+      <span class="dot"></span>
+      <span>Disponible para nuevas oportunidades</span>
+    </div>
+
+    <h1>Mauro Agustín Romero</h1>
+    <p class="role">Desarrollador Full Stack</p>
+
+    <p class="lede">
+      Diseño y construyo productos digitales completos: desde el modelo de
+      datos y la arquitectura del backend hasta la experiencia final de
+      usuario. Este sitio documenta cómo pensé, construí y fui ajustando
+      ShoppingOnline, mi proyecto principal.
+    </p>
+
+    <div class="hero-feature">
+      <div>
+        <p class="label">Proyecto principal</p>
+        <strong>ShoppingOnline</strong>
+        <p>Marketplace local para emprendedores y comercios</p>
+      </div>
+    </div>
+
+    <div class="hero-actions">
+      <a href="https://shoppingonlinesn.com" class="btn" target="_blank" rel="noopener">
+        Ver ShoppingOnline en vivo
+        <svg class="icon" aria-hidden="true"><use href="#icon-external"></use></svg>
+      </a>
+      <a href="#sobre-el-proyecto" class="btn secondary">
+        Explorar el caso de estudio
+        <svg class="icon" aria-hidden="true"><use href="#icon-arrow-right"></use></svg>
+      </a>
+    </div>
+
+    <div class="hero-shot">
+      <div class="media-frame wide">
+        <img class="js-img" src="assets/images/HomeMarketplace.png" alt="Captura general de la pantalla principal de ShoppingOnline" loading="lazy">
+        <div class="media-fallback">
+          <svg class="icon" aria-hidden="true"><use href="#icon-camera"></use></svg>
+          <span>Captura principal de ShoppingOnline — reemplazar imagen</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===============================================================
+       01 · SOBRE EL PROYECTO
+       =============================================================== -->
+  <section class="project-section" id="sobre-el-proyecto" data-nav-id="sobre-el-proyecto">
+    <div class="wrap">
+      <div class="section-header reveal">
+        <span class="index">01</span>
+        <div>
+          <h2>ShoppingOnline</h2>
+          <p>Marketplace local pensado para que cualquier emprendedor o comercio pueda tener su propia tienda online, sin depender solo de redes sociales.</p>
+        </div>
+      </div>
+
+      <div class="meta-grid reveal">
+        <div class="meta-item">
+          <p class="k">Qué es</p>
+          <p class="v">Plataforma de comercio electrónico local donde cada comercio abre su propia tienda dentro de un marketplace unificado.</p>
+        </div>
+        <div class="meta-item">
+          <p class="k">Problema que resuelve</p>
+          <p class="v">Muchos comercios chicos venden de forma desordenada por redes sociales, sin catálogo, stock ni presencia digital propia.</p>
+        </div>
+        <div class="meta-item">
+          <p class="k">Público objetivo</p>
+          <p class="v">Emprendedores y comercios locales como vendedores; compradores de la zona. El sitio opera por localidad: cada ciudad tiene su propio marketplace dentro de la misma plataforma.</p>
+        </div>
+        <div class="meta-item">
+          <p class="k">Estado del proyecto</p>
+          <p class="v"><span class="status-pill">En producción</span></p>
+        </div>
+      </div>
+
+      <div class="prose">
+        <p><strong>Objetivo del sistema:</strong> darle a cada comercio una tienda propia, con su catálogo, precios y stock, dentro de un marketplace que organiza todo por categoría y localidad para que el comprador encuentre rápido lo que busca cerca suyo.</p>
+      </div>
+
+      <div class="media-frame wide" style="margin-top:40px;">
+        <img class="js-img" src="assets/images/HomeMarketplace.png" alt="Captura principal del sistema ShoppingOnline mostrando el marketplace" loading="lazy">
+        <div class="media-fallback">
+          <svg class="icon" aria-hidden="true"><use href="#icon-camera"></use></svg>
+          <span>Captura general del sistema — reemplazar imagen</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===============================================================
+       02 · ARQUITECTURA
+       =============================================================== -->
+  <section class="project-section tinted" id="arquitectura" data-nav-id="arquitectura">
+    <div class="wrap">
+      <div class="section-header reveal">
+        <span class="index">02</span>
+        <div>
+          <h2>Arquitectura</h2>
+          <p>Vista general de cómo se conectan el frontend, el backend, la base de datos y los servicios externos.</p>
+        </div>
+      </div>
+
+      <p class="prose" style="margin-bottom:40px;">
+        La decisión de arquitectura más importante del proyecto: <strong>no todo pasa por un backend propio.</strong>
+        La mayoría de las lecturas y escrituras van directo del navegador a Supabase
+        (PostgreSQL + Auth), protegidas por <strong>Row Level Security</strong> a nivel de fila
+        en la base — no por lógica de servidor. Un backend propio en Node solo existe
+        para lo poco que necesita un secreto de servidor o un límite de velocidad real:
+        pagos, alta de administradores, formularios públicos y firma de subida de imágenes.
+      </p>
+
+      <!-- Diagrama simple de arquitectura. Cada .arch-node es una caja
+           duplicable: copiá el div, pegalo dentro de la misma .arch-row
+           (o creá una fila nueva) y cambiá el texto. -->
+      <div class="arch-diagram reveal">
+        <div class="arch-row">
+          <div class="arch-node">
+            <p class="k">Cliente</p>
+            <p class="v">Frontend estático</p>
+            <p class="d">HTML/CSS/JS vanilla — marketplace, panel de vendedor y admin</p>
+          </div>
+          <div class="arch-node center">
+            <p class="k">Datos</p>
+            <p class="v">Supabase (Postgres + Auth)</p>
+            <p class="d">El frontend le habla directo. La seguridad la da Row Level Security, no un backend en el medio</p>
+          </div>
+          <div class="arch-node">
+            <p class="k">Servidor</p>
+            <p class="v">API propia (Node/Express)</p>
+            <p class="d">Solo lo que necesita un secreto o rate-limiting: pagos, admins, formularios públicos</p>
+          </div>
+        </div>
+        <div class="arch-row">
+          <div class="arch-node">
+            <p class="k">Edge</p>
+            <p class="v">Cloudflare Worker</p>
+            <p class="d">SEO por tienda (meta tags, JSON-LD), sitemap dinámico y headers de seguridad</p>
+          </div>
+          <div class="arch-node">
+            <p class="k">Archivos</p>
+            <p class="v">Cloudinary</p>
+            <p class="d">Subida de imágenes firmada desde el navegador, sin pasar por el servidor</p>
+          </div>
+          <div class="arch-node">
+            <p class="k">Externos</p>
+            <p class="v">Mercado Pago · Resend</p>
+            <p class="d">Cobro de planes y campañas · emails transaccionales</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="arch-legend reveal">
+        <div class="item">
+          <h4>Frontend</h4>
+          <p>Sitio estático sin framework: marketplace público, panel del vendedor y panel de administración como tres apps separadas que comparten el mismo cliente de Supabase.</p>
+        </div>
+        <div class="item">
+          <h4>Supabase (Postgres + RLS)</h4>
+          <p>El frontend inserta y consulta filas directo, con la clave pública ("anon key"). Esa clave está pensada para ser pública; lo que autoriza o bloquea cada operación son las políticas de RLS en la base.</p>
+        </div>
+        <div class="item">
+          <h4>API propia</h4>
+          <p>Node/Express desplegado en Render. Existe solo para lo que RLS no puede resolver por sí solo: usar una clave secreta de servidor, o limitar cuántas veces alguien puede escribir por hora.</p>
+        </div>
+        <div class="item">
+          <h4>Cloudflare Worker</h4>
+          <p>Además de servir los archivos estáticos, intercepta cada request: si es la URL de una tienda, busca sus datos en Supabase e inyecta metaetiquetas y JSON-LD antes de responder, para que los buscadores indexen cada tienda sin migrar a un framework con SSR.</p>
+        </div>
+        <div class="item">
+          <h4>Cloudinary</h4>
+          <p>El navegador sube la imagen directo a Cloudinary con una firma de un solo uso que emite la API. El servidor nunca recibe el archivo — solo autoriza la subida y aplica los límites del plan antes de firmar.</p>
+        </div>
+        <div class="item">
+          <h4>Servicios externos</h4>
+          <p>Mercado Pago para el cobro de planes y campañas de publicidad (con verificación de firma del webhook), y Resend para los emails transaccionales (cartilla aprobada/rechazada, plan por vencer).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===============================================================
+       03 · FRONTEND
+       =============================================================== -->
+  <section class="project-section" id="frontend" data-nav-id="frontend">
+    <div class="wrap">
+      <div class="section-header reveal">
+        <span class="index">03</span>
+        <div>
+          <h2>Frontend</h2>
+          <p>Pantallas principales del marketplace, del lado del comprador.</p>
+        </div>
+      </div>
+
+      <!-- content-grid: para agregar una pantalla nueva, copiá un
+           <article class="content-card"> completo y pegalo debajo. -->
+      <div class="content-grid reveal">
+
+        <article class="content-card">
+          <div class="media-frame wide">
+            <img class="js-img" src="assets/images/HomeMarketplaceSelectorDeLocalidad.png" alt="Captura de la página principal del marketplace, con selector de localidad y grilla de tiendas" loading="lazy">
+            <div class="media-fallback">
+              <svg class="icon" aria-hidden="true"><use href="#icon-camera"></use></svg>
+              <span>Página principal — reemplazar imagen</span>
+            </div>
+          </div>
+          <div class="body">
+            <h3>Marketplace por localidad</h3>
+            <p>Se elige la localidad una vez (queda guardada en el navegador) y desde ahí todo se filtra: categorías, zona, texto de búsqueda y la grilla de tiendas.</p>
+            <div class="tech-row">
+              <span class="tag">JavaScript</span>
+              <span class="tag">Supabase (RLS)</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="content-card">
+          <div class="media-frame">
+            <img class="js-img" src="assets/images/TiendaModalPortada.png" alt="Captura de la ficha pública de una tienda, tipo mini sitio" loading="lazy">
+            <div class="media-fallback">
+              <svg class="icon" aria-hidden="true"><use href="#icon-camera"></use></svg>
+              <span>Ficha de tienda — reemplazar imagen</span>
+            </div>
+          </div>
+          <div class="body">
+            <h3>Ficha de tienda</h3>
+            <p>Se abre como una mini-web propia: galería, catálogo navegable por sección, favoritos guardados en el navegador y un carrito de consulta que arma un mensaje de WhatsApp (no cobra nada).</p>
+            <div class="tech-row">
+              <span class="tag">JavaScript</span>
+              <span class="tag">localStorage</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="content-card">
+          <div class="media-frame">
+            <img class="js-img" src="assets/images/PublicidadMarketplace.png" alt="Captura de un banner de publicidad y mini links en el marketplace" loading="lazy">
+            <!-- IMAGEN AQUI (pantalla de publicidad.js: un banner o mini link de publicidad visible en el marketplace, en su ubicación real) -->
+            <div class="media-fallback">
+              <svg class="icon" aria-hidden="true"><use href="#icon-camera"></use></svg>
+              <span>Publicidad y mini links — reemplazar imagen</span>
+            </div>
+          </div>
+          <div class="body">
+            <h3>Publicidad y mini links</h3>
+            <p>Banners y enlaces destacados en espacios fijos del sitio (inline y sidebar), visibles en todas las localidades o solo en las elegidas por el anunciante.</p>
+            <div class="tech-row">
+              <span class="tag">JavaScript</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="content-card">
+          <div class="media-frame square">
+            <img class="js-img" src="assets/images/PanelEditorVistaPrevia.PNG" alt="Captura de la vista previa en vivo de una cartilla mientras se edita" loading="lazy">
+            <div class="media-fallback">
+              <svg class="icon" aria-hidden="true"><use href="#icon-camera"></use></svg>
+              <span>Vista previa en vivo — reemplazar imagen</span>
+            </div>
+          </div>
+          <div class="body">
+            <h3>Vista previa en vivo</h3>
+            <p>Mientras el vendedor edita su cartilla, ve al lado cómo va a quedar de verdad — con dos modos según el plan: la tarjeta simple del plan gratis, o la mini-web completa de los planes con panel.</p>
+            <div class="tech-row">
+              <span class="tag">JavaScript</span>
+              <span class="tag">CSS</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="content-card">
+          <div class="media-frame square">
+            <img class="js-img" src="assets/images/PanelQr.png" alt="Captura del generador de afiche con QR imprimible para el local" loading="lazy">
+            <div class="media-fallback">
+              <svg class="icon" aria-hidden="true"><use href="#icon-camera"></use></svg>
+              <span>QR imprimible — reemplazar imagen</span>
+            </div>
+          </div>
+          <div class="body">
+            <h3>QR para el local</h3>
+            <p>Genera un afiche listo para imprimir con un QR que apunta a un link corto y permanente, no directo al slug de la tienda — así el papel nunca queda roto si el nombre cambia.</p>
+            <div class="tech-row">
+              <span class="tag">Cloudflare Worker</span>
+              <span class="tag">html2canvas</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="content-card">
+          <div class="media-frame tall">
+            <img class="js-img" src="assets/images/IMG_6586.PNG" alt="Captura del editor de imágenes con recorte y rotación antes de subir" loading="lazy">
+            <div class="media-fallback">
+              <svg class="icon" aria-hidden="true"><use href="#icon-camera"></use></svg>
+              <span>Editor de imágenes — reemplazar imagen</span>
+            </div>
+          </div>
+          <div class="body">
+            <h3>Editor de imágenes</h3>
+            <p>Recorte y rotación antes de subir cualquier foto, con la proporción correcta según el uso: logo cuadrado, banner panorámico, galería o producto.</p>
+            <div class="tech-row">
+              <span class="tag">Cropper.js</span>
+              <span class="tag">Cloudinary</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="content-card">
+          <div class="media-frame square">
+            <img class="js-img" src="assets/images/TiendaModalCatalogo.png" alt="Captura del catálogo dentro de la ficha de tienda, navegado por secciones" loading="lazy">
+            <div class="media-fallback">
+              <svg class="icon" aria-hidden="true"><use href="#icon-camera"></use></svg>
+              <span>Catálogo por sección — reemplazar imagen</span>
+            </div>
+          </div>
+          <div class="body">
+            <h3>Catálogo por sección</h3>
+            <p>Dentro de la ficha, el catálogo se navega por las secciones propias de la tienda (pestañas arriba), con búsqueda de texto y filtro por categoría combinables entre sí.</p>
+            <div class="tech-row">
+              <span class="tag">JavaScript</span>
+              <span class="tag">Supabase (RLS)</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="content-card">
+          <div class="media-frame">
+            <img class="js-img" src="assets/images/PresentacionDeProducto.png" alt="Captura del modal de presentación de un producto individual" loading="lazy">
+            <div class="media-fallback">
+              <svg class="icon" aria-hidden="true"><use href="#icon-camera"></use></svg>
+              <span>Ficha de producto — reemplazar imagen</span>
+            </div>
+          </div>
+          <div class="body">
+            <h3>Ficha de producto</h3>
+            <p>Precio con descuento tachado, stock disponible, favoritos y tres formas de avanzar: sumar al carrito de consulta, ir directo a WhatsApp, o compartir el producto.</p>
+            <div class="tech-row">
+              <span class="tag">JavaScript</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="content-card">
+          <div class="media-frame">
+            <img class="js-img" src="assets/images/CarritoDeCompras.png" alt="Captura del carrito de consulta con varios productos cargados" loading="lazy">
+            <div class="media-fallback">
+              <svg class="icon" aria-hidden="true"><use href="#icon-camera"></use></svg>
+              <span>Carrito de consulta — reemplazar imagen</span>
+            </div>
+          </div>
+          <div class="body">
+            <h3>Carrito de consulta</h3>
+            <p>No es una compra: junta productos con cantidad y total aproximado, guardado en el navegador, listo para convertirse en un solo mensaje ordenado.</p>
+            <div class="tech-row">
+              <span class="tag">JavaScript</span>
+              <span class="tag">localStorage</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="content-card">
+          <div class="media-frame xwide">
+            <img class="js-img" src="assets/images/MensajeConListaDePedidoAlWhatsApp.png" alt="Captura del mensaje de WhatsApp armado automáticamente con la lista de pedido" loading="lazy">
+            <div class="media-fallback">
+              <svg class="icon" aria-hidden="true"><use href="#icon-camera"></use></svg>
+              <span>Mensaje a WhatsApp — reemplazar imagen</span>
+            </div>
+          </div>
+          <div class="body">
+            <h3>Consulta armada para WhatsApp</h3>
+            <p>El carrito se traduce solo en un mensaje prolijo con cada producto, cantidad, precio y total aproximado — el comprador solo tiene que confirmar el envío.</p>
+            <div class="tech-row">
+              <span class="tag">JavaScript</span>
+              <span class="tag">WhatsApp API (wa.me)</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="content-card">
+          <div class="media-frame wide">
+            <img class="js-img" src="assets/images/MiniMapa.png" alt="Captura del mini mapa con la ubicación de la tienda" loading="lazy">
+            <div class="media-fallback">
+              <svg class="icon" aria-hidden="true"><use href="#icon-camera"></use></svg>
+              <span>Ubicación en el mapa — reemplazar imagen</span>
+            </div>
+          </div>
+          <div class="body">
+            <h3>Ubicación en el mapa</h3>
+            <p>Mapa embebido con la ubicación real del local (Leaflet + OpenStreetMap, sin costo por uso), junto a redes sociales, botón de WhatsApp y compartir/copiar enlace de la tienda.</p>
+            <div class="tech-row">
+              <span class="tag">Leaflet</span>
+              <span class="tag">OpenStreetMap</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="content-card">
+          <div class="media-frame tall">
+            <img class="js-img" src="assets/images/CartillAntesDeQueSeActualizaraALaTiendaModal.png" alt="Captura de la cartilla de tienda en su diseño anterior, antes del rediseño a mini-web" loading="lazy">
+            <div class="media-fallback">
+              <svg class="icon" aria-hidden="true"><use href="#icon-camera"></use></svg>
+              <span>Diseño anterior — reemplazar imagen</span>
+            </div>
+          </div>
+          <div class="body">
+            <h3>Antes del rediseño</h3>
+            <p>Así se veía la cartilla de una tienda antes de convertirse en la mini-web actual de "Ficha de tienda" (más arriba): una tarjeta compacta con productos destacados, sin galería ni catálogo navegable por sección.</p>
+            <div class="tech-row">
+              <span class="tag">Iteración de diseño</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 👆 PARA AGREGAR UNA PANTALLA NUEVA: copiá todo el bloque
+             <article class="content-card">...</article> de arriba,
+             pegalo debajo de este comentario y cambiá imagen, título,
+             descripción y tecnologías. -->
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===============================================================
+       04 · SISTEMA DE VENDEDORES
+       =============================================================== -->
+  <section class="project-section tinted" id="vendedores" data-nav-id="vendedores">
+    <div class="wrap">
+      <div class="section-header reveal">
+        <span class="index">04</span>
+        <div>
+          <h2>Sistema de vendedores</h2>
+          <p>Herramientas pensadas para que un emprendedor pueda abrir y administrar su tienda sin ayuda técnica.</p>
+        </div>
+      </div>
+
+      <!-- Cada .feature-card es independiente y duplicable. -->
+      <div class="content-grid cols-4 reveal">
+
+        <article class="feature-card">
+          <p class="eyebrow">Alta</p>
+          <h3>Onboarding guiado</h3>
+          <p>Se elige la localidad una sola vez y la tienda arranca en el plan gratis. Sumar otra localidad más adelante es una opción paga desde el editor.</p>
+        </article>
+
+        <article class="feature-card">
+          <p class="eyebrow">Perfil</p>
+          <h3>Editor de cartilla</h3>
+          <p>Datos básicos, categorías, secciones propias del catálogo, galería, link externo y el historial de planes contratados.</p>
+        </article>
+
+        <article class="feature-card">
+          <p class="eyebrow">Catálogo</p>
+          <h3>Vista en tarjetas</h3>
+          <p>Alta y edición de productos con imágenes, precio, precio de oferta y stock, una por una.</p>
+        </article>
+
+        <article class="feature-card">
+          <p class="eyebrow">Catálogo</p>
+          <h3>Vista en planilla</h3>
+          <p>Grilla editable tipo Excel para catálogos grandes: click para editar, Tab/Enter para moverse, pegado multi-celda y guardado con validación de toda la planilla antes de confirmar.</p>
+        </article>
+
+        <article class="feature-card">
+          <p class="eyebrow">Catálogo</p>
+          <h3>Importar / exportar</h3>
+          <p>Carga masiva de productos por Excel, para no depender solo del alta manual cuando el catálogo es grande.</p>
+        </article>
+
+        <article class="feature-card">
+          <p class="eyebrow">Media</p>
+          <h3>Recorte antes de subir</h3>
+          <p>Cada imagen se recorta y rota en el navegador antes de subirse, con la proporción correcta según si es logo, banner, galería o producto.</p>
+        </article>
+
+        <article class="feature-card">
+          <p class="eyebrow">Catálogo</p>
+          <h3>Secciones propias</h3>
+          <p>Cada tienda arma sus propias secciones de catálogo (por ejemplo "Comida", "Limpieza"), distintas de las categorías generales del marketplace.</p>
+        </article>
+
+        <article class="feature-card">
+          <p class="eyebrow">Contacto</p>
+          <h3>WhatsApp</h3>
+          <p>Mensaje de WhatsApp precargado y personalizable por el vendedor, más un carrito de consulta que arma el pedido antes de enviarlo.</p>
+        </article>
+
+        <article class="feature-card">
+          <p class="eyebrow">Alcance</p>
+          <h3>QR para el local</h3>
+          <p>Afiche imprimible con QR permanente para mostrador o vidriera, que registra cada escaneo como visita a la tienda.</p>
+        </article>
+
+        <article class="feature-card">
+          <p class="eyebrow">Monetización</p>
+          <h3>Publicidad y campañas</h3>
+          <p>Wizard de cuatro pasos (qué promociono → paquete → dónde → pagar) con precio que depende de cuántas localidades se elijan, cobrado por Mercado Pago.</p>
+        </article>
+
+        <article class="feature-card">
+          <p class="eyebrow">Cuenta</p>
+          <h3>Planes</h3>
+          <p>Niveles con distintos límites de fotos, productos y funciones (panel completo, destacado, estadísticas avanzadas), con historial de cambios.</p>
+        </article>
+
+        <!-- 👆 PARA AGREGAR UNA FUNCIONALIDAD NUEVA: copiá un bloque
+             <article class="feature-card">...</article> y pegalo acá. -->
+
+      </div>
+
+      <p class="er-note" style="margin-top:48px;">Capturas reales del panel, en orden: alta de cuenta, carga de datos y catálogo, y administración del día a día.</p>
+
+      <div class="content-grid reveal">
+
+        <article class="content-card">
+          <div class="media-frame tall">
+            <img class="js-img" src="assets/images/CrearCuentaPaso1.PNG" alt="Captura del paso 1 del alta de cuenta: elegir localidad" loading="lazy">
+            <div class="media-fallback">
+              <svg class="icon" aria-hidden="true"><use href="#icon-camera"></use></svg>
+              <span>Alta — paso 1 — reemplazar imagen</span>
+            </div>
+          </div>
+          <div class="body">
+            <h3>Alta — paso 1: localidad</h3>
+            <p>Primer y único dato obligatorio antes de crear la tienda: la provincia y localidad. Todo lo demás queda para después.</p>
+          </div>
+        </article>
+
+        <article class="content-card">
+          <div class="media-frame tall">
+            <img class="js-img" src="assets/images/CrearCuentaPaso2.PNG" alt="Captura del paso 2 del alta de cuenta: nombre y rubro del negocio" loading="lazy">
+            <div class="media-fallback">
+              <svg class="icon" aria-hidden="true"><use href="#icon-camera"></use></svg>
+              <span>Alta — paso 2 — reemplazar imagen</span>
+            </div>
+          </div>
+          <div class="body">
+            <h3>Alta — paso 2: lo esencial</h3>
+            <p>Nombre, rubro y WhatsApp del negocio — con esto ya existe la cartilla. El resto del wizard es opcional y se puede completar más tarde.</p>
+          </div>
+        </article>
+
+        <article class="content-card">
+          <div class="media-frame tall">
+            <img class="js-img" src="assets/images/CrearCuentaPaso3.PNG" alt="Captura del paso 3 del alta de cuenta: subir logo y fotos del negocio" loading="lazy">
+            <div class="media-fallback">
+              <svg class="icon" aria-hidden="true"><use href="#icon-camera"></use></svg>
+              <span>Alta — paso 3 — reemplazar imagen</span>
+            </div>
+          </div>
+          <div class="body">
+            <h3>Alta — paso 3: mostrar el negocio</h3>
+            <p>Logo y hasta 3 fotos, subidas directo a Cloudinary con firma del servidor — el paso donde se disparó el bug de firma inválida contado en "Problemas y soluciones".</p>
+          </div>
+        </article>
+
+        <article class="content-card">
+          <div class="media-frame tall">
+            <img class="js-img" src="assets/images/CrearCuentaPaso4.PNG" alt="Captura del paso 4 del alta de cuenta: horario, dirección y medios de pago" loading="lazy">
+            <div class="media-fallback">
+              <svg class="icon" aria-hidden="true"><use href="#icon-camera"></use></svg>
+              <span>Alta — paso 4 — reemplazar imagen</span>
+            </div>
+          </div>
+          <div class="body">
+            <h3>Alta — paso 4: los detalles</h3>
+            <p>Horario, dirección, zona, medios de pago y redes — todo opcional, pero mejora directamente cómo te encuentran y te compran.</p>
+          </div>
+        </article>
+
+        <article class="content-card">
+          <div class="media-frame">
+            <img class="js-img" src="assets/images/PanelInicio.png" alt="Captura de la pantalla de inicio del panel del vendedor" loading="lazy">
+            <div class="media-fallback">
+              <svg class="icon" aria-hidden="true"><use href="#icon-camera"></use></svg>
+              <span>Inicio del panel — reemplazar imagen</span>
+            </div>
+          </div>
+          <div class="body">
+            <h3>Inicio del panel</h3>
+            <p>Punto de entrada a todo lo demás: cartilla, productos, QR, estadísticas, publicidad y plan, más el link público listo para compartir.</p>
+          </div>
+        </article>
+
+        <article class="content-card">
+          <div class="media-frame square">
+            <img class="js-img" src="assets/images/VistaPreviaDeTienda.png" alt="Captura de la tarjeta compacta de tienda del plan gratis" loading="lazy">
+            <div class="media-fallback">
+              <svg class="icon" aria-hidden="true"><use href="#icon-camera"></use></svg>
+              <span>Vista plan gratis — reemplazar imagen</span>
+            </div>
+          </div>
+          <div class="body">
+            <h3>Vista previa — plan gratis</h3>
+            <p>En el plan gratis la tienda se muestra como tarjeta compacta (galería, productos y contacto) en vez de la mini-web completa de los planes con panel.</p>
+          </div>
+        </article>
+
+        <article class="content-card">
+          <div class="media-frame square">
+            <img class="js-img" src="assets/images/PanelCargarDatos1.png" alt="Captura del editor de cartilla: categorías, descripción, WhatsApp y ubicación" loading="lazy">
+            <div class="media-fallback">
+              <svg class="icon" aria-hidden="true"><use href="#icon-camera"></use></svg>
+              <span>Editor de cartilla (1) — reemplazar imagen</span>
+            </div>
+          </div>
+          <div class="body">
+            <h3>Editor de cartilla — datos y contacto</h3>
+            <p>Categorías, descripción, WhatsApp validado en vivo, mensaje prellenado y ubicación buscable en el mapa.</p>
+          </div>
+        </article>
+
+        <article class="content-card">
+          <div class="media-frame square">
+            <img class="js-img" src="assets/images/PanelCargarDatos2.png" alt="Captura del editor de cartilla: redes sociales, medios de pago, logo y galería" loading="lazy">
+            <div class="media-fallback">
+              <svg class="icon" aria-hidden="true"><use href="#icon-camera"></use></svg>
+              <span>Editor de cartilla (2) — reemplazar imagen</span>
+            </div>
+          </div>
+          <div class="body">
+            <h3>Editor de cartilla — redes y medios</h3>
+            <p>Redes sociales, medios de pago y envío, y la carga de logo, banner y galería (hasta 8 fotos) contra Cloudinary.</p>
+          </div>
+        </article>
+
+        <article class="content-card">
+          <div class="media-frame wide">
+            <img class="js-img" src="assets/images/PanelPlanilla.png" alt="Captura de la vista en planilla del catálogo de productos" loading="lazy">
+            <div class="media-fallback">
+              <svg class="icon" aria-hidden="true"><use href="#icon-camera"></use></svg>
+              <span>Planilla de catálogo — reemplazar imagen</span>
+            </div>
+          </div>
+          <div class="body">
+            <h3>Catálogo — vista en planilla</h3>
+            <p>80 productos editables tipo Excel, con importación desde Excel, plantilla descargable y actualización masiva de precios a un click.</p>
+          </div>
+        </article>
+
+        <article class="content-card">
+          <div class="media-frame">
+            <img class="js-img" src="assets/images/PanelActualizarPreciosMasivo.png" alt="Captura del modal de actualización masiva de precios" loading="lazy">
+            <div class="media-fallback">
+              <svg class="icon" aria-hidden="true"><use href="#icon-camera"></use></svg>
+              <span>Precios masivos — reemplazar imagen</span>
+            </div>
+          </div>
+          <div class="body">
+            <h3>Actualización masiva de precios</h3>
+            <p>Aumento o descuento por porcentaje aplicado a todo el catálogo o a una sección puntual, con vista previa del efecto antes de confirmar.</p>
+          </div>
+        </article>
+
+        <article class="content-card">
+          <div class="media-frame">
+            <img class="js-img" src="assets/images/PanelSecciones.png" alt="Captura del administrador de secciones del catálogo" loading="lazy">
+            <div class="media-fallback">
+              <svg class="icon" aria-hidden="true"><use href="#icon-camera"></use></svg>
+              <span>Secciones — reemplazar imagen</span>
+            </div>
+          </div>
+          <div class="body">
+            <h3>Secciones de la tienda</h3>
+            <p>Hasta 4 secciones propias, reordenables, que aparecen como botones arriba del catálogo público de la tienda.</p>
+          </div>
+        </article>
+
+        <article class="content-card">
+          <div class="media-frame">
+            <img class="js-img" src="assets/images/PanelPlanes.png" alt="Captura de la tabla comparativa de planes del vendedor" loading="lazy">
+            <div class="media-fallback">
+              <svg class="icon" aria-hidden="true"><use href="#icon-camera"></use></svg>
+              <span>Planes — reemplazar imagen</span>
+            </div>
+          </div>
+          <div class="body">
+            <h3>Comparación de planes</h3>
+            <p>Límites de fotos y productos, y funciones extra como link a sitio propio o estadísticas, comparados lado a lado con el plan actual resaltado.</p>
+          </div>
+        </article>
+
+        <article class="content-card">
+          <div class="media-frame xwide">
+            <img class="js-img" src="assets/images/RegistroDeActividad.png" alt="Captura de las estadísticas de actividad de la tienda en los últimos 30 días" loading="lazy">
+            <div class="media-fallback">
+              <svg class="icon" aria-hidden="true"><use href="#icon-camera"></use></svg>
+              <span>Estadísticas — reemplazar imagen</span>
+            </div>
+          </div>
+          <div class="body">
+            <h3>Estadísticas de actividad</h3>
+            <p>Vistas de tienda y de producto, clics a WhatsApp y redes, búsquedas y compartidos de los últimos 30 días, todo agregado por evento.</p>
+          </div>
+        </article>
+
+        <article class="content-card">
+          <div class="media-frame">
+            <img class="js-img" src="assets/images/BotonDeEliminarCuenta.PNG" alt="Captura del botón y aviso para eliminar la cuenta y la tienda" loading="lazy">
+            <div class="media-fallback">
+              <svg class="icon" aria-hidden="true"><use href="#icon-camera"></use></svg>
+              <span>Eliminar cuenta — reemplazar imagen</span>
+            </div>
+          </div>
+          <div class="body">
+            <h3>Eliminar cuenta</h3>
+            <p>Baja inmediata de la tienda y cierre de sesión al instante, con aviso claro de qué datos se conservan por obligación legal/impositiva.</p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===============================================================
+       05 · PANEL DE ADMINISTRACIÓN
+       =============================================================== -->
+  <section class="project-section" id="admin" data-nav-id="admin">
+    <div class="wrap">
+      <div class="section-header reveal">
+        <span class="index">05</span>
+        <div>
+          <h2>Panel de administración</h2>
+          <p>Vista interna para operar la plataforma: moderar contenido, gestionar cuentas y medir resultados.</p>
+        </div>
+      </div>
+
+      <div class="content-grid reveal">
+
+        <article class="content-card">
+          <div class="media-frame xwide">
+            <img class="js-img" src="assets/images/PanelAdmin.png" alt="Captura del panel de gestión de tiendas" loading="lazy">
+            <div class="media-fallback">
+              <svg class="icon" aria-hidden="true"><use href="#icon-camera"></use></svg>
+              <span>Gestión de tiendas — reemplazar imagen</span>
+            </div>
+          </div>
+          <div class="body">
+            <h3>Gestión de tiendas</h3>
+            <p>Edición completa de cualquier tienda, incluido lo que el vendedor no puede tocar: plan, estado, destacada, verificada, rating y límites puntuales por tienda — para dar soporte real sin depender del dueño.</p>
+          </div>
+        </article>
+
+        <article class="content-card">
+          <div class="media-frame xwide">
+            <img class="js-img" src="assets/images/Admin.png" alt="Captura del panel de gestión de usuarios" loading="lazy">
+            <div class="media-fallback">
+              <svg class="icon" aria-hidden="true"><use href="#icon-camera"></use></svg>
+              <span>Gestión de usuarios — reemplazar imagen</span>
+            </div>
+          </div>
+          <div class="body">
+            <h3>Equipo de administradores</h3>
+            <p>Alta y baja de admins y moderadores con roles diferenciados (superadmin / moderador), reutilizando la cuenta si la persona ya tenía una como emprendedor.</p>
+          </div>
+        </article>
+
+        <article class="content-card">
+          <div class="media-frame square">
+            <img class="js-img" src="assets/images/PanelCatalogo.png" alt="Captura del panel de gestión de productos" loading="lazy">
+            <div class="media-fallback">
+              <svg class="icon" aria-hidden="true"><use href="#icon-camera"></use></svg>
+              <span>Gestión de productos — reemplazar imagen</span>
+            </div>
+          </div>
+          <div class="body">
+            <h3>Catálogo desde admin</h3>
+            <p>El mismo editor de productos del panel del vendedor (tarjetas o planilla), disponible para que un admin cargue o corrija el catálogo de cualquier tienda sin duplicar código.</p>
+          </div>
+        </article>
+
+        <article class="content-card">
+          <div class="media-frame">
+            <img class="js-img" src="assets/images/PanelCategorias.png" alt="Captura del panel de gestión de categorías" loading="lazy">
+            <!-- IMAGEN AQUI (panel de admin: árbol de categorías generales del marketplace con sus subcategorías) -->
+            <div class="media-fallback">
+              <svg class="icon" aria-hidden="true"><use href="#icon-camera"></use></svg>
+              <span>Gestión de categorías — reemplazar imagen</span>
+            </div>
+          </div>
+          <div class="body">
+            <h3>Categorías del marketplace</h3>
+            <p>Árbol de categorías generales (con subcategorías) que usa el buscador público — distinto de las secciones propias que arma cada tienda para su catálogo.</p>
+          </div>
+        </article>
+
+        <article class="content-card">
+          <div class="media-frame wide">
+            <img class="js-img" src="assets/images/HabilitarLocalidades.png" alt="Captura del panel de gestión de localidades" loading="lazy">
+            <div class="media-fallback">
+              <svg class="icon" aria-hidden="true"><use href="#icon-camera"></use></svg>
+              <span>Gestión de localidades — reemplazar imagen</span>
+            </div>
+          </div>
+          <div class="body">
+            <h3>Localidades</h3>
+            <p>Habilitación de cada localidad (con una cantidad mínima de tiendas antes de activarla) y su multiplicador de precio de publicidad — las ciudades grandes cuestan más que un pueblo chico.</p>
+          </div>
+        </article>
+
+        <article class="content-card">
+          <div class="media-frame wide">
+            <img class="js-img" src="assets/images/Aprobar_Rechazar_Tienda.png" alt="Captura del panel de moderación" loading="lazy">
+            <div class="media-fallback">
+              <svg class="icon" aria-hidden="true"><use href="#icon-camera"></use></svg>
+              <span>Moderación — reemplazar imagen</span>
+            </div>
+          </div>
+          <div class="body">
+            <h3>Moderación</h3>
+            <p>Aprobación o rechazo de cartillas nuevas y de sus revisiones posteriores, más la cola de denuncias. Cada acción de moderación queda en un log auditable.</p>
+          </div>
+        </article>
+
+        <article class="content-card">
+          <div class="media-frame square">
+            <img class="js-img" src="assets/images/PanelPublicidad.png" alt="Captura del panel de publicidad" loading="lazy">
+            <div class="media-fallback">
+              <svg class="icon" aria-hidden="true"><use href="#icon-camera"></use></svg>
+              <span>Publicidad — reemplazar imagen</span>
+            </div>
+          </div>
+          <div class="body">
+            <h3>Publicidad</h3>
+            <p>Carga de banners y mini links, y definición de los paquetes de campañas: tipo de anuncio, duración, precio por localidad y cupo máximo para mantener la escasez controlada.</p>
+          </div>
+        </article>
+
+        <article class="content-card">
+          <div class="media-frame xwide">
+            <img class="js-img" src="assets/images/RevisionDeCampanias.png" alt="Captura del panel de campañas" loading="lazy">
+            <div class="media-fallback">
+              <svg class="icon" aria-hidden="true"><use href="#icon-camera"></use></svg>
+              <span>Campañas — reemplazar imagen</span>
+            </div>
+          </div>
+          <div class="body">
+            <h3>Campañas</h3>
+            <p>Revisión de campañas pagadas por vendedores antes de que salgan al aire, con aviso si el cupo de esa localidad ya está lleno.</p>
+          </div>
+        </article>
+
+        <article class="content-card">
+          <div class="media-frame">
+            <img class="js-img" src="assets/images/Analytic.png" alt="Captura del panel de estadísticas" loading="lazy">
+            <!-- IMAGEN AQUI (panel de admin: pantalla de analítica con los gráficos de búsquedas, vistas y clics a WhatsApp) -->
+            <div class="media-fallback">
+              <svg class="icon" aria-hidden="true"><use href="#icon-camera"></use></svg>
+              <span>Estadísticas — reemplazar imagen</span>
+            </div>
+          </div>
+          <div class="body">
+            <h3>Analytics</h3>
+            <p>Eventos de uso agregados por día (búsquedas, vistas de tienda y producto, clics a WhatsApp, escaneos de QR) y métricas por campaña: impresiones, clics y WhatsApps atribuidos.</p>
+          </div>
+        </article>
+
+        <!-- 👆 PARA AGREGAR UNA VISTA DE ADMIN NUEVA: copiá un
+             <article class="content-card">...</article> y pegalo acá. -->
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===============================================================
+       06 · BASE DE DATOS
+       =============================================================== -->
+  <section class="project-section tinted" id="base-de-datos" data-nav-id="base-de-datos">
+    <div class="wrap">
+      <div class="section-header reveal">
+        <span class="index">06</span>
+        <div>
+          <h2>Base de datos</h2>
+          <p>Modelo relacional en PostgreSQL. Estas son las tablas principales y cómo se relacionan entre sí.</p>
+        </div>
+      </div>
+
+      <p class="er-note">Cadena de identidad y catálogo</p>
+      <div class="er-diagram reveal">
+        <div class="er-chain">
+          <span class="er-box">auth.users</span>
+          <span class="er-arrow"></span>
+          <span class="er-box">emprendedores</span>
+          <span class="er-arrow"></span>
+          <span class="er-box">tiendas</span>
+          <span class="er-arrow"></span>
+          <span class="er-box">productos</span>
+          <span class="er-arrow"></span>
+          <span class="er-box">producto_imagenes</span>
+        </div>
+      </div>
+
+      <p class="er-note">Cadena de ubicación (define qué tiendas ve cada visitante)</p>
+      <div class="er-diagram reveal">
+        <div class="er-chain">
+          <span class="er-box">provincias</span>
+          <span class="er-arrow"></span>
+          <span class="er-box">localidades</span>
+          <span class="er-arrow"></span>
+          <span class="er-box">tiendas</span>
+          <span class="er-arrow"></span>
+          <span class="er-box">tienda_localidades</span>
+        </div>
+      </div>
+
+      <p class="er-note">Otras relaciones relevantes: tiendas ↔ categorías (muchos a muchos) · tiendas → planes · campañas → paquetes de publicidad → localidades · cada acción de moderación queda registrada con su admin, tienda y denuncia asociada</p>
+
+      <!-- database-table: para agregar una tabla nueva, copiá todo el
+           bloque <div class="database-table">...</div> y pegalo debajo. -->
+      <div class="db-tables reveal">
+
+        <div class="database-table">
+          <div class="head">
+            <h4>tiendas</h4>
+            <p>El nodo central del modelo</p>
+          </div>
+          <pre class="code-example"><span class="kw">CREATE TABLE</span> public.tiendas (
+  id             integer <span class="kw">PRIMARY KEY</span> <span class="kw">DEFAULT</span> nextval(<span class="str">'tiendas_id_seq'</span>),
+  emprendedor_id uuid <span class="kw">REFERENCES</span> emprendedores(id),
+  localidad_id   integer <span class="kw">REFERENCES</span> localidades(id),
+  nombre         character varying <span class="kw">NOT NULL</span>,
+  slug           character varying <span class="kw">UNIQUE</span>
+                 <span class="kw">CHECK</span> (slug_valido(slug::text)),
+  plan_id        integer <span class="kw">REFERENCES</span> planes(id),
+  estado         character varying <span class="kw">NOT NULL DEFAULT</span> <span class="str">'pendiente'</span>
+                 <span class="kw">CHECK</span> (estado <span class="kw">IN</span> (<span class="str">'borrador'</span>,<span class="str">'pendiente'</span>,<span class="str">'aprobada'</span>,<span class="str">'rechazada'</span>)),
+  revisado_por   uuid <span class="kw">REFERENCES</span> admins(id),
+  deleted_at     timestamptz
+  <span class="cm">-- + verificada, destacada, rating, whatsapp, multi_localidad_activo...</span>
+);</pre>
+          <div class="relation"><strong>Relación:</strong> pertenece a un emprendedor, a una localidad y a un plan. De acá cuelgan productos, fotos, secciones, campañas y reseñas. El <code>estado</code> con CHECK evita que una fila quede en un estado que no existe.</div>
+        </div>
+
+        <div class="database-table">
+          <div class="head">
+            <h4>productos</h4>
+            <p>Producto publicado dentro de una tienda</p>
+          </div>
+          <pre class="code-example"><span class="kw">CREATE TABLE</span> public.productos (
+  id            integer <span class="kw">PRIMARY KEY</span> <span class="kw">DEFAULT</span> nextval(<span class="str">'productos_id_seq'</span>),
+  tienda_id     integer <span class="kw">NOT NULL REFERENCES</span> tiendas(id),
+  categoria_id  integer <span class="kw">REFERENCES</span> tienda_secciones(id),
+  nombre        character varying,
+  precio        numeric,
+  precio_oferta numeric,
+  oferta_hasta  date,
+  stock         integer <span class="kw">DEFAULT</span> 1,
+  visible       boolean <span class="kw">DEFAULT true</span>,
+  disponible    boolean <span class="kw">DEFAULT true</span>,
+  deleted_at    timestamptz
+);</pre>
+          <div class="relation"><strong>Relación:</strong> pertenece a una tienda y a una <em>sección propia de esa tienda</em> (no a la categoría general del marketplace — son dos árboles distintos a propósito). <code>deleted_at</code> en vez de un DELETE real: borrado lógico.</div>
+        </div>
+
+        <div class="database-table">
+          <div class="head">
+            <h4>localidades</h4>
+            <p>Cada ciudad tiene su propio marketplace</p>
+          </div>
+          <pre class="code-example"><span class="kw">CREATE TABLE</span> public.localidades (
+  id                        integer <span class="kw">PRIMARY KEY</span> <span class="kw">DEFAULT</span> nextval(<span class="str">'localidades_id_seq'</span>),
+  provincia_id              integer <span class="kw">NOT NULL REFERENCES</span> provincias(id),
+  nombre                    character varying <span class="kw">NOT NULL</span>,
+  activa                    boolean <span class="kw">DEFAULT true</span>,
+  cantidad_minima           integer <span class="kw">DEFAULT</span> 15,
+  multiplicador_publicidad  numeric <span class="kw">NOT NULL DEFAULT</span> 1
+                            <span class="kw">CHECK</span> (multiplicador_publicidad > 0),
+  fecha_habilitacion        timestamptz
+);</pre>
+          <div class="relation"><strong>Relación:</strong> agrupa tiendas de una provincia. <code>cantidad_minima</code> es el piso de tiendas para habilitarla; <code>multiplicador_publicidad</code> hace que anunciar en una ciudad grande cueste más que en un pueblo chico.</div>
+        </div>
+
+        <div class="database-table">
+          <div class="head">
+            <h4>planes</h4>
+            <p>El modelo de negocio, como filas de una tabla</p>
+          </div>
+          <pre class="code-example"><span class="kw">CREATE TABLE</span> public.planes (
+  id                      integer <span class="kw">PRIMARY KEY</span> <span class="kw">DEFAULT</span> nextval(<span class="str">'planes_id_seq'</span>),
+  slug                    character varying <span class="kw">UNIQUE NOT NULL</span>,
+  precio_mensual          numeric <span class="kw">NOT NULL DEFAULT</span> 0,
+  max_fotos               integer <span class="kw">NOT NULL DEFAULT</span> 3,
+  max_productos           integer <span class="kw">NOT NULL DEFAULT</span> 0,
+  con_panel               boolean <span class="kw">DEFAULT false</span>,
+  destacado               boolean <span class="kw">DEFAULT false</span>,
+  estadisticas_avanzadas  boolean <span class="kw">DEFAULT false</span>
+);</pre>
+          <div class="relation"><strong>Relación:</strong> cada tienda referencia un plan (y opcionalmente un <code>plan_pendiente_id</code> mientras se procesa un cambio). Los límites de fotos, productos y funciones salen de acá, no están escritos a mano en el código.</div>
+        </div>
+
+        <div class="database-table">
+          <div class="head">
+            <h4>campanias</h4>
+            <p>Publicidad paga, con cupo por localidad</p>
+          </div>
+          <pre class="code-example"><span class="kw">CREATE TABLE</span> public.campanias (
+  id          integer <span class="kw">PRIMARY KEY</span> <span class="kw">DEFAULT</span> nextval(<span class="str">'campanias_id_seq'</span>),
+  tienda_id   integer <span class="kw">REFERENCES</span> tiendas(id),
+  paquete_id  integer <span class="kw">NOT NULL REFERENCES</span> paquetes_publicidad(id),
+  estado      character varying <span class="kw">NOT NULL DEFAULT</span> <span class="str">'pendiente_pago'</span>
+              <span class="kw">CHECK</span> (estado <span class="kw">IN</span> (<span class="str">'borrador'</span>,<span class="str">'pendiente_pago'</span>,<span class="str">'en_revision'</span>,
+                             <span class="str">'activa'</span>,<span class="str">'pausada'</span>,<span class="str">'rechazada'</span>,<span class="str">'finalizada'</span>)),
+  mp_payment_id text,
+  inicio      date,
+  fin         date
+);</pre>
+          <div class="relation"><strong>Relación:</strong> una campaña elige un paquete (tipo de anuncio + duración + precio) y una o varias localidades vía <code>campania_localidades</code>. El estado modela todo el flujo: desde borrador hasta pagada y aprobada por un admin.</div>
+        </div>
+
+        <div class="database-table">
+          <div class="head">
+            <h4>moderacion_logs</h4>
+            <p>Auditoría: quién hizo qué</p>
+          </div>
+          <pre class="code-example"><span class="kw">CREATE TABLE</span> public.moderacion_logs (
+  id            integer <span class="kw">PRIMARY KEY</span> <span class="kw">DEFAULT</span> nextval(<span class="str">'moderacion_logs_id_seq'</span>),
+  admin_id      uuid <span class="kw">NOT NULL REFERENCES</span> admins(id),
+  accion        character varying <span class="kw">NOT NULL CHECK</span> (accion <span class="kw">IN</span> (
+                <span class="str">'tienda_aprobada'</span>,<span class="str">'tienda_rechazada'</span>,<span class="str">'tienda_desactivada'</span>,
+                <span class="str">'denuncia_revisada'</span>,<span class="str">'emprendedor_bloqueado'</span> <span class="cm">/* ... */</span>)),
+  tienda_id     integer <span class="kw">REFERENCES</span> tiendas(id),
+  denuncia_id   integer <span class="kw">REFERENCES</span> denuncias(id),
+  detalle       text
+);</pre>
+          <div class="relation"><strong>Relación:</strong> cada acción de un admin (aprobar, rechazar, bloquear) queda registrada con quién la hizo y sobre qué tienda o denuncia. No se puede editar un catálogo del panel de admin sin dejar rastro.</div>
+        </div>
+
+        <!-- 👆 PARA AGREGAR UNA TABLA NUEVA: copiá un bloque
+             <div class="database-table">...</div> y pegalo acá. -->
+
+      </div>
+
+      <p class="er-note" style="margin-top:8px;">
+        Estas 6 son una muestra representativa. El esquema completo tiene 35 tablas
+        organizadas en seis grupos: identidad (emprendedores, admins), catálogo
+        (tiendas, productos, secciones), ubicación (provincias, localidades, zonas),
+        publicidad (publicidad, campañas, paquetes, métricas diarias), moderación
+        (denuncias, bloqueos, logs, revisiones) y analítica (eventos, eventos_diarios,
+        reseñas).
+      </p>
+    </div>
+  </section>
+
+  <!-- ===============================================================
+       07 · FUNCIONALIDADES
+       =============================================================== -->
+  <section class="project-section" id="funcionalidades" data-nav-id="funcionalidades">
+    <div class="wrap">
+      <div class="section-header reveal">
+        <span class="index">07</span>
+        <div>
+          <h2>Funcionalidades</h2>
+          <p>Listado general de las capacidades del sistema, de punta a punta.</p>
+        </div>
+      </div>
+
+      <div class="content-grid cols-4 reveal">
+
+        <article class="feature-card">
+          <p class="eyebrow">Cuenta</p>
+          <h3>Login</h3>
+          <p>Autenticación con Supabase Auth: email y contraseña, más Google OAuth para compradores.</p>
+        </article>
+
+        <article class="feature-card">
+          <p class="eyebrow">Vendedores</p>
+          <h3>Alta de tienda</h3>
+          <p>Onboarding guiado: localidad primero, después la cartilla arranca en plan gratis.</p>
+        </article>
+
+        <article class="feature-card">
+          <p class="eyebrow">Catálogo</p>
+          <h3>Productos</h3>
+          <p>Alta, edición y borrado lógico, en vista de tarjetas o en planilla tipo Excel.</p>
+        </article>
+
+        <article class="feature-card">
+          <p class="eyebrow">Descubrimiento</p>
+          <h3>Buscador y filtros</h3>
+          <p>Texto libre combinado con localidad, categoría y zona dentro de la localidad.</p>
+        </article>
+
+        <article class="feature-card">
+          <p class="eyebrow">Contacto</p>
+          <h3>WhatsApp</h3>
+          <p>Mensaje personalizable por el vendedor, con carrito de consulta previo.</p>
+        </article>
+
+        <article class="feature-card">
+          <p class="eyebrow">Monetización</p>
+          <h3>Planes y pagos</h3>
+          <p>Checkout con Mercado Pago, confirmación idempotente por webhook y renovación automática por 30 días.</p>
+        </article>
+
+        <article class="feature-card">
+          <p class="eyebrow">Monetización</p>
+          <h3>Publicidad</h3>
+          <p>Campañas con cupo por localidad y precio calculado según cuántas se eligen.</p>
+        </article>
+
+        <article class="feature-card">
+          <p class="eyebrow">Alcance</p>
+          <h3>Multi-localidad</h3>
+          <p>Opción paga para que una tienda aparezca en más de una localidad a la vez.</p>
+        </article>
+
+        <article class="feature-card">
+          <p class="eyebrow">Catálogo</p>
+          <h3>Importación de productos</h3>
+          <p>Carga masiva por Excel para catálogos grandes, con validación antes de guardar.</p>
+        </article>
+
+        <article class="feature-card">
+          <p class="eyebrow">Alcance</p>
+          <h3>SEO en el edge</h3>
+          <p>Meta tags, OpenGraph y JSON-LD por tienda, más sitemap dinámico, inyectados por un Cloudflare Worker sin migrar de framework.</p>
+        </article>
+
+        <article class="feature-card">
+          <p class="eyebrow">Seguridad</p>
+          <h3>Row Level Security</h3>
+          <p>El frontend habla directo con la base; lo que cada usuario puede leer o escribir lo define una política de RLS, no el código del cliente.</p>
+        </article>
+
+        <article class="feature-card">
+          <p class="eyebrow">Operación</p>
+          <h3>Panel administrativo</h3>
+          <p>Moderación, denuncias, localidades, categorías, publicidad, campañas, analítica y equipo, todo en un mismo panel.</p>
+        </article>
+
+        <!-- 👆 PARA AGREGAR UNA FUNCIONALIDAD NUEVA: copiá un bloque
+             <article class="feature-card">...</article> y pegalo acá. -->
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===============================================================
+       08 · DECISIONES TÉCNICAS
+       =============================================================== -->
+  <section class="project-section tinted" id="decisiones" data-nav-id="decisiones">
+    <div class="wrap">
+      <div class="section-header reveal">
+        <span class="index">08</span>
+        <div>
+          <h2>Decisiones técnicas</h2>
+          <p>Decisiones concretas tomadas durante el desarrollo, y por qué se tomaron.</p>
+        </div>
+      </div>
+
+      <!-- decision-card: para agregar una decisión nueva, copiá todo
+           el bloque <div class="decision-card">...</div> y pegalo debajo. -->
+      <div class="reveal">
+
+        <div class="decision-card">
+          <div class="col problema">
+            <p class="k">Problema</p>
+            <p>Un backend propio manejando cada lectura y escritura era un salto de red innecesario para operaciones simples, y una superficie de ataque más grande de mantener.</p>
+          </div>
+          <div class="col decision">
+            <p class="k">Decisión</p>
+            <p>Mover la mayoría del CRUD a Supabase directo desde el frontend, protegido por Row Level Security. El backend Node quedó solo para lo que necesita un secreto de servidor o rate-limiting real.</p>
+          </div>
+          <div class="col motivo">
+            <p class="k">Motivo</p>
+            <p>Menos capas para lo simple, y un backend enfocado únicamente en lo sensible: pagos, alta de admins, formularios públicos, firma de imágenes.</p>
+          </div>
+          <div class="col resultado">
+            <p class="k">Resultado</p>
+            <p>Backend más chico y fácil de auditar. La seguridad vive en un solo lugar: las políticas de RLS.</p>
+          </div>
+        </div>
+
+        <div class="decision-card">
+          <div class="col problema">
+            <p class="k">Problema</p>
+            <p>Cada vendedor pegaba la URL de su propia cuenta de Cloudinary para las fotos: fricción de alta y cero moderación real sobre lo publicado.</p>
+          </div>
+          <div class="col decision">
+            <p class="k">Decisión</p>
+            <p>Centralizar en una sola cuenta de Cloudinary del proyecto, con subida firmada desde el navegador — el servidor solo emite la firma, nunca recibe el archivo.</p>
+          </div>
+          <div class="col motivo">
+            <p class="k">Motivo</p>
+            <p>Onboarding sin fricción y control real: las imágenes viven en una carpeta por tienda, nadie puede reemplazarlas después de aprobadas.</p>
+          </div>
+          <div class="col resultado">
+            <p class="k">Resultado</p>
+            <p>Subida en un clic, con los límites de cada plan aplicados antes de firmar, no después.</p>
+          </div>
+        </div>
+
+        <div class="decision-card">
+          <div class="col problema">
+            <p class="k">Problema</p>
+            <p>El sitio es una SPA sin framework con SSR — cada tienda necesitaba su propia página indexable, con metaetiquetas y datos estructurados propios.</p>
+          </div>
+          <div class="col decision">
+            <p class="k">Decisión</p>
+            <p>Resolver el SEO en el edge: un Cloudflare Worker intercepta la request, busca los datos de la tienda en Supabase e inyecta el <code>&lt;head&gt;</code> antes de responder.</p>
+          </div>
+          <div class="col motivo">
+            <p class="k">Motivo</p>
+            <p>Evitar una reescritura completa del frontend solo para tener SEO por tienda.</p>
+          </div>
+          <div class="col resultado">
+            <p class="k">Resultado</p>
+            <p>Cada tienda se indexa individualmente, con OpenGraph y JSON-LD, sin cambiar de stack.</p>
+          </div>
+        </div>
+
+        <div class="decision-card">
+          <div class="col problema">
+            <p class="k">Problema</p>
+            <p>Los IDs de pago de Mercado Pago no son secretos: cualquiera podía golpear el webhook con un ID real y forzar una confirmación de pago falsa.</p>
+          </div>
+          <div class="col decision">
+            <p class="k">Decisión</p>
+            <p>Verificar la firma HMAC-SHA256 de cada notificación, con comparación de tiempo constante, y no procesar nada si el secreto no está configurado (fail-closed).</p>
+          </div>
+          <div class="col motivo">
+            <p class="k">Motivo</p>
+            <p>Un webhook sin verificar es, en la práctica, un endpoint público para extender el vencimiento de un plan sin pagar.</p>
+          </div>
+          <div class="col resultado">
+            <p class="k">Resultado</p>
+            <p>Solo Mercado Pago puede disparar una confirmación real; una config faltante bloquea en vez de dejar pasar.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===============================================================
+       09 · PROBLEMAS Y SOLUCIONES
+       =============================================================== -->
+  <section class="project-section" id="problemas-soluciones" data-nav-id="problemas-soluciones">
+    <div class="wrap">
+      <div class="section-header reveal">
+        <span class="index">09</span>
+        <div>
+          <h2>Problemas y soluciones</h2>
+          <p>Situaciones reales encontradas durante el desarrollo y cómo se resolvieron.</p>
+        </div>
+      </div>
+
+      <div class="timeline reveal">
+
+        <div class="timeline-item">
+          <p class="date">Seguridad de pagos</p>
+          <p class="title">El webhook de Mercado Pago podía dispararse sin haber pagado</p>
+          <div class="stage-row">
+            <div class="stage">
+              <p class="k">Problema</p>
+              <p>Los IDs de pago de Mercado Pago no son secretos. Cualquiera podía golpear el webhook con un ID real y forzar que se confirmara un pago inexistente, estirando el vencimiento de un plan sin pagar de nuevo.</p>
+            </div>
+            <div class="stage">
+              <p class="k">Análisis</p>
+              <p>No había ninguna verificación de que la notificación viniera realmente de Mercado Pago — se confiaba en el contenido del request sin más.</p>
+            </div>
+            <div class="stage">
+              <p class="k">Solución</p>
+              <p>Verificación de la firma HMAC-SHA256 del header de la notificación con comparación de tiempo constante, y fail-closed: sin el secreto configurado, no se procesa nada.</p>
+            </div>
+            <div class="stage">
+              <p class="k">Resultado</p>
+              <p>Solo notificaciones legítimas de Mercado Pago pueden confirmar un pago.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <p class="date">Bug de cobro</p>
+          <p class="title">Las campañas en varias localidades se cobraban como si fueran una sola</p>
+          <div class="stage-row">
+            <div class="stage">
+              <p class="k">Problema</p>
+              <p>El precio de una campaña de publicidad se tomaba directo del precio base del paquete, sin importar cuántas localidades había elegido el anunciante.</p>
+            </div>
+            <div class="stage">
+              <p class="k">Análisis</p>
+              <p>El precio real depende de la cantidad de localidades y del multiplicador propio de cada una — esa cuenta vivía en una función de la base, pero el checkout no la estaba usando.</p>
+            </div>
+            <div class="stage">
+              <p class="k">Solución</p>
+              <p>El checkout pasó a calcular el monto con la misma función de base de datos que ya usaba el panel de administración para mostrar y simular precios.</p>
+            </div>
+            <div class="stage">
+              <p class="k">Resultado</p>
+              <p>Una campaña de varias localidades cobra lo que corresponde, con una sola fuente de verdad para el precio.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <p class="date">Seguridad de emails</p>
+          <p class="title">El nombre de una tienda podía inyectar HTML en un email transaccional</p>
+          <div class="stage-row">
+            <div class="stage">
+              <p class="k">Problema</p>
+              <p>El nombre de la tienda y el motivo de un rechazo — texto cargado por el emprendedor o un admin — se insertaban tal cual en el HTML de los emails de aviso.</p>
+            </div>
+            <div class="stage">
+              <p class="k">Análisis</p>
+              <p>Un nombre de tienda con markup podía terminar inyectando contenido o links en un email enviado desde el dominio de confianza del proyecto.</p>
+            </div>
+            <div class="stage">
+              <p class="k">Solución</p>
+              <p>Todo texto cargado por usuarios se escapa antes de insertarse en el HTML del email, con el mismo criterio que ya se usaba en el frontend.</p>
+            </div>
+            <div class="stage">
+              <p class="k">Resultado</p>
+              <p>El contenido cargado por usuarios nunca vuelve a interpretarse como HTML.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <p class="date">Bug de infraestructura</p>
+          <p class="title">El tracking fallaba en silencio según con o sin "www" entrara el visitante</p>
+          <div class="stage-row">
+            <div class="stage">
+              <p class="k">Problema</p>
+              <p>El sitio responde tanto con "www" como sin él, pero la variable de entorno con la URL del frontend solo podía tener un valor. Quien entraba por la variante no configurada tenía el tracking de eventos roto por CORS, sin ningún error visible.</p>
+            </div>
+            <div class="stage">
+              <p class="k">Análisis</p>
+              <p>El CORS del backend comparaba contra un único origen — la otra variante del dominio quedaba, sin querer, fuera de la lista permitida.</p>
+            </div>
+            <div class="stage">
+              <p class="k">Solución</p>
+              <p>Generar automáticamente ambas variantes (con y sin "www") a partir de la URL configurada, en vez de depender de que alguien cargue las dos a mano.</p>
+            </div>
+            <div class="stage">
+              <p class="k">Resultado</p>
+              <p>Tracking consistente sin importar por qué variante del dominio entre el visitante.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <p class="date">Bug de datos</p>
+          <p class="title">Borrar un moderador podía dejar huérfana la tienda de un emprendedor</p>
+          <div class="stage-row">
+            <div class="stage">
+              <p class="k">Problema</p>
+              <p>Dar de baja a un admin borraba también su cuenta de autenticación. El alta de admins reutiliza cuentas existentes, así que alguien que era admin y emprendedor a la vez perdía su cuenta entera al sacarle el rol.</p>
+            </div>
+            <div class="stage">
+              <p class="k">Análisis</p>
+              <p>El endpoint de borrado no distinguía si esa cuenta también tenía una fila en <code>emprendedores</code> antes de eliminarla de Auth.</p>
+            </div>
+            <div class="stage">
+              <p class="k">Solución</p>
+              <p>Antes de borrar la cuenta de autenticación, se comprueba si también es emprendedor; si lo es, solo se quita el rol de admin y la cuenta se conserva.</p>
+            </div>
+            <div class="stage">
+              <p class="k">Resultado</p>
+              <p>Sacar a alguien del equipo de moderación ya no rompe la tienda de nadie.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <p class="date">Debugging</p>
+          <p class="title">Cambiar la localidad de una tienda desde el panel no hacía nada — sin ningún error</p>
+          <div class="stage-row">
+            <div class="stage">
+              <p class="k">Problema</p>
+              <p>Desde el panel de administración, editar la localidad de una tienda parecía no tener efecto: no aparecía ningún error, pero el valor quedaba exactamente igual después de guardar.</p>
+            </div>
+            <div class="stage">
+              <p class="k">Análisis</p>
+              <p>La tabla tiene un trigger que protege campos sensibles (plan, verificación, localidad, entre otros) de ediciones no autorizadas, y solo deja pasar el cambio si la sesión pertenece a un admin real. Las primeras pruebas se habían hecho directo en el editor SQL de la base, donde no existe una sesión de usuario — ese contexto nunca cuenta como admin, así que el trigger revertía el cambio en silencio.</p>
+            </div>
+            <div class="stage">
+              <p class="k">Solución</p>
+              <p>En vez de tocar el trigger (que cumple una función real de seguridad), se confirmó el comportamiento probando desde una sesión de admin real dentro del panel, donde la identidad sí se resuelve correctamente.</p>
+            </div>
+            <div class="stage">
+              <p class="k">Resultado</p>
+              <p>El mecanismo de protección sigue funcionando como corresponde, y quedó documentado que el editor SQL directo no es un lugar válido para probar cambios que dependen de la identidad de quien los hace.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <p class="date">Bug de producto</p>
+          <p class="title">"Sumar al carrito" aparecía aunque la tienda no tuviera WhatsApp cargado</p>
+          <div class="stage-row">
+            <div class="stage">
+              <p class="k">Problema</p>
+              <p>El carrito de consulta arma un pedido y lo manda por WhatsApp al número de la tienda — pero el botón para sumar productos se mostraba siempre, sin importar si la tienda tenía un número cargado o no.</p>
+            </div>
+            <div class="stage">
+              <p class="k">Análisis</p>
+              <p>Para una tienda sin WhatsApp, el link final del carrito quedaba armado sin destinatario, roto en silencio. El comprador podía terminar armando una lista entera de productos sin ninguna forma real de enviarla.</p>
+            </div>
+            <div class="stage">
+              <p class="k">Solución</p>
+              <p>El botón de sumar al carrito, y el ícono del carrito flotante, ahora dependen de que la tienda tenga WhatsApp cargado — si no lo tiene, directamente no se ofrece esa opción.</p>
+            </div>
+            <div class="stage">
+              <p class="k">Resultado</p>
+              <p>Ya no existe ese callejón sin salida: si el carrito está disponible, siempre hay un canal real para enviarlo.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <p class="date">Bug de catálogo</p>
+          <p class="title">Una sección de productos podía quedar completamente afuera de la carga inicial de la tienda</p>
+          <div class="stage-row">
+            <div class="stage">
+              <p class="k">Problema</p>
+              <p>La carga inicial de una tienda trae hasta 60 productos, pero se tomaban como un bloque global ordenado por <code>orden</code> sin distinguir secciones. Una sección cuyos productos arrancaban con un <code>orden</code> alto podía quedar completamente afuera de esos primeros 60, aunque sus productos existieran y estuvieran bien vinculados a ella.</p>
+            </div>
+            <div class="stage">
+              <p class="k">Análisis</p>
+              <p>El filtro para mostrar una sección puntual comparaba nombres de texto en vez del id real de <code>tienda_secciones</code> — frágil ante mayúsculas o espacios. Además, la función tenía el offset de la carga general fijado en cero ("Ver más" nunca avanzaba) y devolvía el total topado en 60, ocultando que había más productos y convirtiendo el límite real del plan en un límite de 60. Se confirmó todo pidiendo la definición exacta ya desplegada en la base y probándola en vivo antes de tocar nada.</p>
+            </div>
+            <div class="stage">
+              <p class="k">Solución</p>
+              <p>Se reescribió la función para repartir la carga inicial en round-robin real entre secciones, respetando el offset real en las páginas siguientes, se cambió el filtro de sección para usar su id numérico en vez del nombre, y se sumó paginación propia de a 20 dentro de cada sección.</p>
+            </div>
+            <div class="stage">
+              <p class="k">Resultado</p>
+              <p>Todas las secciones aparecen desde que se abre la tienda sin importar su orden interno, "Ver más" funciona tanto en la vista general como adentro de una sección, y el límite real del plan sigue siendo el techo — nunca la estrategia de carga inicial.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <p class="date">Bug de subida de imágenes</p>
+          <p class="title">Ningún logo ni foto de galería se podía subir: Cloudinary rechazaba la firma</p>
+          <div class="stage-row">
+            <div class="stage">
+              <p class="k">Problema</p>
+              <p>De un día para el otro, subir el logo o las fotos de la tienda durante el onboarding empezó a fallar siempre: Cloudinary devolvía <code>401 Invalid Signature</code> y la imagen nunca llegaba a existir del lado de Cloudinary.</p>
+            </div>
+            <div class="stage">
+              <p class="k">Análisis</p>
+              <p>El endpoint de firma armaba la firma incluyendo <code>max_file_size</code> junto con <code>folder</code> y <code>timestamp</code>, pensado para que Cloudinary rechazara del lado del servidor cualquier archivo mayor a 8MB. El problema: <code>max_file_size</code> no es un parámetro real de una subida firmada manual — solo existe como ajuste de un "Upload Preset" configurado en el panel de Cloudinary. Cloudinary lo ignoraba por completo al reconstruir su propia firma esperada, así que la firma calculada acá nunca podía coincidir, sin importar que las credenciales estuvieran perfectas. Antes de llegar ahí se descartaron por evidencia otras hipótesis más obvias — credenciales rotadas en Render, caché de un deploy viejo — comparando directamente el <code>string to sign</code> que reportaba el error de Cloudinary contra lo que el código realmente firmaba.</p>
+            </div>
+            <div class="stage">
+              <p class="k">Solución</p>
+              <p>Se sacó <code>max_file_size</code> de lo firmado (y de lo que manda el navegador), dejando la firma solo con lo que Cloudinary realmente valida. El límite de 8MB se mantiene igual, pero chequeado del lado del navegador antes de subir — que era, en la práctica, la protección real que existía desde el principio.</p>
+            </div>
+            <div class="stage">
+              <p class="k">Resultado</p>
+              <p>Las subidas de logo, banner, galería y fotos de producto volvieron a funcionar al toque. Queda pendiente, como mejora futura, mover ese límite a un Upload Preset propio si algún día hace falta que Cloudinary también lo rechace por su cuenta.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 👆 PARA AGREGAR UN PROBLEMA NUEVO: copiá un bloque
+             <div class="timeline-item">...</div> y pegalo acá. -->
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===============================================================
+       10 · EVOLUCIÓN
+       =============================================================== -->
+  <section class="project-section tinted" id="evolucion" data-nav-id="evolucion">
+    <div class="wrap">
+      <div class="section-header reveal">
+        <span class="index">10</span>
+        <div>
+          <h2>Evolución</h2>
+          <p>Cómo fue creciendo el proyecto versión a versión.</p>
+        </div>
+      </div>
+
+      <!-- version-item: para agregar una versión nueva, copiá un
+           bloque <div class="version-item">...</div> y pegalo debajo,
+           antes o después de "Estado actual" según corresponda. -->
+      <div class="timeline reveal">
+
+        <div class="version-item">
+          <p class="version-tag">V1 — Versión inicial</p>
+          <h3>Todo pasaba por el backend</h3>
+          <p>Un backend Node/Express clásico manejaba login, alta de tiendas y productos, localidades y moderación — cada operación, sin importar cuán simple, cruzaba por el servidor.</p>
+        </div>
+
+        <div class="version-item">
+          <p class="version-tag">V2</p>
+          <h3>Migración a Supabase + RLS</h3>
+          <p>La mayoría de las lecturas y escrituras se movieron a Supabase directo desde el frontend, protegidas por Row Level Security. El backend Node quedó reducido a lo que necesita secretos de servidor: pagos y alta de administradores.</p>
+        </div>
+
+        <div class="version-item">
+          <p class="version-tag">V3</p>
+          <h3>Publicidad, SEO y hardening</h3>
+          <p>Subida de imágenes firmada a Cloudinary, sistema de publicidad y campañas con Mercado Pago, notificaciones transaccionales por email, un Cloudflare Worker para SEO en el edge, y una ronda de seguridad: CSP, webhook fail-closed, saneo de HTML en emails, CORS con y sin "www".</p>
+        </div>
+
+        <div class="version-item current">
+          <h3>Estado actual</h3>
+          <p>Marketplace en producción operando por localidad, con panel de vendedor completo (catálogo en tarjetas o planilla tipo Excel, secciones propias, QR imprimible) y panel de administración con moderación, campañas y analítica.</p>
+        </div>
+
+        <div class="version-item next">
+          <p class="version-tag">Próximos cambios</p>
+          <h3>Roadmap</h3>
+          <p>El foco hoy está puesto en hacer crecer el marketplace: sumar más tiendas, afinar la estrategia de marketing y la presencia en redes sociales, y el trabajo constante de encontrar y resolver bugs en producción. Del lado del código, estoy evaluando mejoras al panel de vendedor para simplificar la carga de productos — hoy es, para mí, la parte más pesada de esa experiencia.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===============================================================
+       11 · EVIDENCIA TÉCNICA
+       =============================================================== -->
+  <section class="project-section" id="evidencia" data-nav-id="evidencia">
+    <div class="wrap">
+      <div class="section-header reveal">
+        <span class="index">11</span>
+        <div>
+          <h2>Evidencia técnica</h2>
+          <p>Material que respalda que el sistema fue construido de verdad: capturas, código y estructura del proyecto.</p>
+        </div>
+      </div>
+
+      <!-- evidence-card: para agregar evidencia nueva (captura, código,
+           diagrama), copiá un bloque <div class="evidence-card">...</div>. -->
+      <div class="evidence-grid reveal">
+
+        <div class="evidence-card">
+          <div class="media-frame">
+            <img class="js-img" src="assets/images/CodigoBackend.png" alt="Captura del código del backend" loading="lazy">
+            <!-- IMAGEN AQUI (captura de código: la función o ruta que crea un producto nuevo, por ejemplo el INSERT en productos-editor.js) -->
+            <div class="media-fallback">
+              <svg class="icon" aria-hidden="true"><use href="#icon-camera"></use></svg>
+              <span>Código — reemplazar imagen</span>
+            </div>
+          </div>
+          <div class="body">
+            <p class="label">Código</p>
+            <p class="title">Ruta de creación de producto</p>
+          </div>
+        </div>
+
+        <div class="evidence-card">
+          <div class="media-frame xwide">
+            <img class="js-img" src="assets/images/QuerySQL_Id_Tienda_Localidad_Provincia_Plan_Productos_ProductosVisibles_Destacados.png" alt="Captura de una consulta SQL" loading="lazy">
+            <div class="media-fallback">
+              <svg class="icon" aria-hidden="true"><use href="#icon-camera"></use></svg>
+              <span>SQL — reemplazar imagen</span>
+            </div>
+          </div>
+          <div class="body">
+            <p class="label">Base de datos</p>
+            <p class="title">Consulta de catálogo por tienda</p>
+          </div>
+        </div>
+
+        <div class="evidence-card">
+          <div class="media-frame">
+            <img class="js-img" src="assets/images/DiagramaArquitectura.png" alt="Diagrama de arquitectura del sistema" loading="lazy">
+            <!-- IMAGEN AQUI (diagrama adicional: un esquema propio de la arquitectura general, hecho a mano o con una herramienta como Excalidraw) -->
+            <div class="media-fallback">
+              <svg class="icon" aria-hidden="true"><use href="#icon-camera"></use></svg>
+              <span>Diagrama — reemplazar imagen</span>
+            </div>
+          </div>
+          <div class="body">
+            <p class="label">Diagrama</p>
+            <p class="title">Arquitectura general del sistema</p>
+          </div>
+        </div>
+
+        <div class="evidence-card">
+          <div class="media-frame wide">
+            <img class="js-img" src="assets/images/Aprobar_Rechazar_Tienda.png" alt="Captura del panel de administración en uso" loading="lazy">
+            <div class="media-fallback">
+              <svg class="icon" aria-hidden="true"><use href="#icon-camera"></use></svg>
+              <span>Captura — reemplazar imagen</span>
+            </div>
+          </div>
+          <div class="body">
+            <p class="label">Producto</p>
+            <p class="title">Panel administrativo en uso</p>
+          </div>
+        </div>
+
+        <div class="evidence-card">
+          <div class="media-frame wide">
+            <img class="js-img" src="assets/images/QuerySQL_Id_tienda_slug_CantidadDeProductos.png" alt="Captura de una consulta SQL que cuenta productos activos por tienda" loading="lazy">
+            <div class="media-fallback">
+              <svg class="icon" aria-hidden="true"><use href="#icon-camera"></use></svg>
+              <span>SQL — reemplazar imagen</span>
+            </div>
+          </div>
+          <div class="body">
+            <p class="label">Base de datos</p>
+            <p class="title">Cantidad de productos activos por tienda</p>
+          </div>
+        </div>
+
+        <div class="evidence-card">
+          <div class="media-frame wide">
+            <img class="js-img" src="assets/images/QuerySQL_tienda_Producto_precioOriginal_PrecioOferta_DescuentoPorcentaje.png" alt="Captura de una consulta SQL que calcula el descuento de productos en oferta" loading="lazy">
+            <div class="media-fallback">
+              <svg class="icon" aria-hidden="true"><use href="#icon-camera"></use></svg>
+              <span>SQL — reemplazar imagen</span>
+            </div>
+          </div>
+          <div class="body">
+            <p class="label">Base de datos</p>
+            <p class="title">Descuento por producto en oferta</p>
+          </div>
+        </div>
+
+        <div class="evidence-card">
+          <div class="media-frame square">
+            <img class="js-img" src="assets/images/Error_max_file_size.PNG" alt="Captura del error de firma inválida de Cloudinary en la subida de fotos" loading="lazy">
+            <div class="media-fallback">
+              <svg class="icon" aria-hidden="true"><use href="#icon-camera"></use></svg>
+              <span>Bug real — reemplazar imagen</span>
+            </div>
+          </div>
+          <div class="body">
+            <p class="label">Bug real en producción</p>
+            <p class="title">Error de firma en la subida de fotos (ver caso abajo)</p>
+          </div>
+        </div>
+
+        <!-- 👆 PARA AGREGAR EVIDENCIA NUEVA: copiá un bloque
+             <div class="evidence-card">...</div> y pegalo acá. -->
+
+      </div>
+
+      <p class="er-note" style="margin-top:40px;">Estructura real — dos repos separados: el sitio (estático) y la API (lo privilegiado)</p>
+      <pre class="folder-tree reveal"><span class="fd">shoppingonline-web/</span>            <span class="cm"># sitio estático, Cloudflare Workers</span>
+├── <span class="fd">js/</span>
+│   ├── marketplace.js         <span class="cm"># sitio público: filtros y grilla</span>
+│   ├── tienda-modal.js        <span class="cm"># ficha de tienda, carrito de consulta</span>
+│   ├── productos-editor.js    <span class="cm"># compartido: panel + admin</span>
+│   ├── productos-planilla.js  <span class="cm"># vista tipo Excel del catálogo</span>
+│   ├── supabaseClient.js      <span class="cm"># cliente único, anon key pública</span>
+│   └── config.js              <span class="cm"># URLs por entorno</span>
+├── <span class="fd">panel/</span>                    <span class="cm"># panel del vendedor</span>
+│   ├── panel-onboarding.js
+│   ├── panel-editor.js
+│   └── panel-publicidad.js
+├── <span class="fd">admin/</span>                    <span class="cm"># panel de administración</span>
+│   ├── admin-tiendas.js
+│   ├── admin-campanias.js
+│   └── admin-equipo.js
+├── <span class="fd">css/site/</span>                 <span class="cm"># estilos por módulo, numerados</span>
+├── worker.js               <span class="cm"># edge: SEO por tienda, sitemap, headers</span>
+└── wrangler.jsonc
+
+<span class="fd">shopping-api/</span>                  <span class="cm"># Node/Express, Render — solo lo privilegiado</span>
+├── <span class="fd">routes/</span>
+│   ├── pagos.js               <span class="cm"># preferencia + webhook Mercado Pago</span>
+│   ├── admins.js               <span class="cm"># alta/baja de equipo (Supabase Admin API)</span>
+│   ├── imagenes.js             <span class="cm"># firma de subida a Cloudinary</span>
+│   ├── campanias.js
+│   ├── denuncias.js             <span class="cm"># público, con rate limit</span>
+│   ├── solicitudes.js           <span class="cm"># público, con rate limit</span>
+│   ├── eventos.js               <span class="cm"># tracking, con rate limit</span>
+│   └── notificaciones.js       <span class="cm"># emails transaccionales (cron)</span>
+├── <span class="fd">utils/</span>
+│   ├── supabaseAdmin.js        <span class="cm"># cliente con service_role — bypasea RLS</span>
+│   ├── mercadopago.js          <span class="cm"># verificación de firma del webhook</span>
+│   └── validacion.js
+├── <span class="fd">test/</span>                     <span class="cm"># vitest: validación y firma de webhook</span>
+└── server.js</pre>
+    </div>
+  </section>
+
+  <!-- ===============================================================
+       12 · OTROS PROYECTOS
+       =============================================================== -->
+  <section class="project-section tinted" id="otros-proyectos" data-nav-id="otros-proyectos">
+    <div class="wrap">
+      <div class="section-header reveal">
+        <span class="index">12</span>
+        <div>
+          <h2>Otros proyectos</h2>
+          <p>Otros trabajos, más allá de ShoppingOnline.</p>
+        </div>
+      </div>
+
+      <!-- project-card: para agregar un proyecto nuevo, copiá todo
+           el bloque <article class="project-card">...</article> y
+           pegalo debajo, antes del "add-project-card". -->
+      <div class="content-grid reveal">
+
+        <article class="project-card">
+          <div class="media-frame xwide">
+            <img class="js-img" src="assets/images/FotoJurgoRoblox.png" alt="Captura del juego Adventure Islands en Roblox, mostrando las islas de los jugadores" loading="lazy">
+            <div class="media-fallback">
+              <svg class="icon" aria-hidden="true"><use href="#icon-camera"></use></svg>
+              <span>Captura de Adventure Islands — reemplazar imagen</span>
+            </div>
+          </div>
+          <div class="body">
+            <div class="top-row">
+              <h3>Adventure Islands</h3>
+              <span class="status-pill">Activo</span>
+            </div>
+            <p>Juego multijugador para Roblox Studio (hasta 8 jugadores): cada uno recibe una isla propia con progreso, construcción y persistencia. Un solo sistema administra las N bases por <code>UserId</code>, en vez de duplicar lógica por isla.</p>
+            <div class="tech-row">
+              <span class="tag accent">Lua / Luau</span>
+              <span class="tag accent">Roblox Studio</span>
+              <span class="tag accent">DataStoreService</span>
+            </div>
+            <div class="link-row">
+              <a href="https://www.roblox.com/es/games/121759150849279/Adventure-Islands" target="_blank" rel="noopener">Ver proyecto →</a>
+            </div>
+          </div>
+        </article>
+        <!-- Proyecto hobby, hecho por interés personal en el desarrollo
+             de juegos — no es el enfoque profesional actual, pero se
+             mantiene acá porque muestra los mismos criterios de
+             arquitectura que el resto del portfolio: un solo sistema
+             sirviendo N instancias (islas) por identidad de usuario,
+             separación cliente/servidor y persistencia de estado. -->
+
+        <div class="add-project-card">
+          Copiá un bloque "project-card" del HTML<br>y pegalo acá para sumar otro proyecto
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===============================================================
+       CONTACTO
+       =============================================================== -->
+  <section class="contact-section" id="contacto" data-nav-id="contacto">
+    <div class="wrap contact-grid">
+      <div>
+        <h2>Trabajemos juntos</h2>
+        <p class="lede">Siempre estoy abierto a sumarme a un proyecto interesante o a charlar sobre una idea nueva. Si tenés algo en mente, escribime — no hace falta que esté totalmente definido.</p>
+      </div>
+
+      <div>
+        <ul class="contact-list">
+          <li>
+            <span class="k">Nombre</span>
+            <span class="v">Mauro Agustín Romero</span>
+          </li>
+          <li>
+            <span class="k">Email</span>
+            <span class="copy-row">
+              <a class="v" href="mailto:romero.mauro.a11@gmail.com">romero.mauro.a11@gmail.com</a>
+              <button class="copy-btn" type="button" data-copy="romero.mauro.a11@gmail.com" aria-label="Copiar email">
+                <svg class="icon" aria-hidden="true"><use href="#icon-copy"></use></svg>
+                <span class="copy-btn-status" aria-live="polite"></span>
+              </button>
+            </span>
+          </li>
+          <li>
+            <span class="k">GitHub</span>
+            <a class="v" href="https://github.com/romeromauro11" target="_blank" rel="noopener">github.com/romeromauro11</a>
+          </li>
+          <li>
+            <span class="k">Portfolio</span>
+            <a class="v" href="#top">este mismo sitio</a>
+          </li>
+        </ul>
+        <p class="er-note" style="margin-top:16px;margin-bottom:0;">Los repos de ShoppingOnline son privados — la sección "Evidencia técnica" más arriba muestra código, SQL y estructura real del proyecto en su lugar.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <span>© <span id="year"></span> Mauro Agustín Romero</span>
+  <span>Construido con HTML, CSS y JavaScript</span>
+</footer>
+
+<!-- Aparece solo después de bajar un poco (ver main.js) -->
+<button class="back-to-top" id="backToTop" aria-label="Volver arriba" hidden>
+  <svg class="icon" aria-hidden="true"><use href="#icon-arrow-up"></use></svg>
+</button>
+
+<!-- =================================================================
+     LIGHTBOX — modal de imagen ampliada
+     ================================================================= -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Imagen ampliada" hidden>
+  <button class="lightbox-close" aria-label="Cerrar imagen">
+    <svg class="icon" aria-hidden="true"><use href="#icon-close"></use></svg>
+  </button>
+  <img src="" alt="">
+</div>
+
+<script src="js/main.js"></script>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
