@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/industry-eb81465d-1192-4829-b0d9-9be4058c541f/styles.css">
+<script src="_ds/industry-eb81465d-1192-4829-b0d9-9be4058c541f/_ds_bundle.js"></script>
+<style>
+  body { margin: 0; background: var(--color-bg); color: var(--color-text); font-family: var(--font-body); }
+  a { color: var(--color-accent-700); text-decoration: none; }
+  a:hover { color: var(--color-accent-900); text-decoration: underline; }
+  a:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+  html { scroll-behavior: smooth; }
+</style>
+</helmet>
+
+<div style="max-width:1180px;margin:0 auto;padding:0 20px 0;font-family:var(--font-body);font-size:15px;line-height:1.55">
+
+  <nav class="nav" style="position:sticky;top:0;z-index:20;display:flex;flex-wrap:wrap;align-items:baseline;gap:0 20px;padding:12px 0;margin-bottom:14px;background:var(--color-bg);border-bottom:1px solid var(--color-divider)">
+    <a href="#top" class="nav-brand" style="font-family:var(--font-heading);font-weight:600;font-size:20px;letter-spacing:0.01em;color:var(--color-text);text-decoration:none">MAURO A. ROMERO</a>
+    <span style="flex:1"></span>
+    <div style="display:flex;flex-wrap:wrap;gap:4px 16px;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;font-family:var(--font-heading)">
+      <a href="#proyecto">01 Proyecto</a>
+      <a href="#arquitectura">02 Arquitectura</a>
+      <a href="#producto">03 Producto</a>
+      <a href="#decisiones">04 Decisiones</a>
+      <a href="#datos">05 Datos</a>
+      <a href="#evidencia">06 Evidencia</a>
+      <a href="#contacto">Contacto</a>
+    </div>
+  </nav>
+
+  <header id="top" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:34px;align-items:start;padding:34px 0 48px">
+    <div>
+      <p style="margin:0 0 14px;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--color-accent-700)">Full-stack developer &nbsp;·&nbsp; Argentina &nbsp;·&nbsp; Disponible</p>
+      <h1 style="margin:0 0 8px;font-size:clamp(40px,6vw,64px);line-height:1.02;letter-spacing:-0.02em">Mauro Agustín<br>Romero</h1>
+      <p style="margin:0 0 22px;font-family:var(--font-heading);font-size:22px;letter-spacing:0.02em;color:var(--color-accent-800)">Diseño, construyo y mantengo productos completos — del modelo de datos a la pantalla.</p>
+      <p style="margin:0 0 14px;max-width:52ch;text-wrap:pretty">Este documento es un caso de estudio de <strong>ShoppingOnline</strong>: un marketplace local en producción que construí solo, desde el esquema de base de datos y las políticas de seguridad hasta el panel del vendedor, el panel de administración y el SEO en el edge.</p>
+      <sc-if value="{{ showEnglish }}" hint-placeholder-val="{{ true }}">
+        <p style="margin:0 0 22px;max-width:52ch;font-size:14px;color:var(--color-accent-800);border-left:2px solid var(--color-accent);padding-left:12px">A case study of ShoppingOnline — a local marketplace in production, built solo: database schema and row-level security policies, seller dashboard, admin panel and per-store SEO at the edge.</p>
+      </sc-if>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:26px">
+        <a class="btn btn-primary blueprint" href="https://shoppingonlinesn.com" target="_blank" rel="noopener" style="position:relative;display:inline-flex;align-items:center;gap:8px;padding:10px 18px;background:var(--color-accent);color:#fff;font-family:var(--font-heading);font-size:15px;letter-spacing:0.04em;text-transform:uppercase;text-decoration:none">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          Ver el sitio en vivo ↗
+        </a>
+        <a class="btn btn-secondary" href="mailto:romero.mauro.a11@gmail.com" style="display:inline-flex;align-items:center;padding:10px 18px;border:1px solid var(--color-divider);color:var(--color-text);font-family:var(--font-heading);font-size:15px;letter-spacing:0.04em;text-transform:uppercase;text-decoration:none">Escribirme</a>
+      </div>
+      <dl style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:16px;margin:0;padding-top:20px;border-top:1px solid var(--color-divider)">
+        <div>
+          <dt style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-accent-700)">Rol</dt>
+          <dd style="margin:2px 0 0;font-family:var(--font-heading);font-size:17px">Único desarrollador</dd>
+        </div>
+        <div>
+          <dt style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-accent-700)">Estado</dt>
+          <dd style="margin:2px 0 0;font-family:var(--font-heading);font-size:17px">En producción</dd>
+        </div>
+        <div>
+          <dt style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-accent-700)">Alcance</dt>
+          <dd style="margin:2px 0 0;font-family:var(--font-heading);font-size:17px">Front · API · DB · Edge</dd>
+        </div>
+      </dl>
+    </div>
+    <figure class="blueprint" style="position:relative;margin:0;padding:0">
+      <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+      <img src="assets/images/HomeMarketplace.png" alt="Pantalla principal del marketplace ShoppingOnline" style="display:block;width:100%;height:auto" loading="lazy">
+    </figure>
+  </header>
+
+  <section id="proyecto" style="padding:48px 0;border-top:1px solid var(--color-divider)">
+    <div style="display:flex;gap:16px;align-items:baseline;margin-bottom:26px">
+      <span style="font-family:var(--font-heading);font-size:15px;letter-spacing:0.1em;color:var(--color-accent)">01</span>
+      <div>
+        <h2 style="margin:0 0 4px;font-size:clamp(28px,3.4vw,38px)">El proyecto</h2>
+        <p style="margin:0;font-size:15px;max-width:66ch;color:var(--color-neutral-800)">Marketplace local para que cualquier comercio o emprendedor tenga su tienda online propia, sin depender solo de redes sociales.</p>
+        <sc-if value="{{ showEnglish }}" hint-placeholder-val="{{ true }}">
+          <p style="margin:6px 0 0;font-size:13px;color:var(--color-accent-700)">A per-city marketplace where every small business gets its own storefront, catalog and stock.</p>
+        </sc-if>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:1px;background:var(--color-divider);border:1px solid var(--color-divider)">
+      <div style="background:var(--color-bg);padding:18px">
+        <p style="margin:0 0 6px;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-accent-700)">Qué es</p>
+        <p style="margin:0;font-size:14px">Plataforma de comercio local donde cada comercio abre su propia tienda dentro de un marketplace unificado, organizado por categoría y localidad.</p>
+      </div>
+      <div style="background:var(--color-bg);padding:18px">
+        <p style="margin:0 0 6px;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-accent-700)">Problema</p>
+        <p style="margin:0;font-size:14px">Los comercios chicos venden desordenado por redes: sin catálogo, sin stock, sin precios visibles y sin nada indexable en Google.</p>
+      </div>
+      <div style="background:var(--color-bg);padding:18px">
+        <p style="margin:0 0 6px;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-accent-700)">Cómo funciona</p>
+        <p style="margin:0;font-size:14px">El vendedor carga su cartilla en 4 pasos, un moderador la aprueba y queda publicada. El comprador filtra por localidad y consulta por WhatsApp.</p>
+      </div>
+      <div style="background:var(--color-bg);padding:18px">
+        <p style="margin:0 0 6px;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-accent-700)">Modelo</p>
+        <p style="margin:0;font-size:14px">Planes por suscripción con límites reales aplicados en la base, más campañas de publicidad cobradas por localidad con Mercado Pago.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="arquitectura" style="padding:48px 0;border-top:1px solid var(--color-divider)">
+    <div style="display:flex;gap:16px;align-items:baseline;margin-bottom:26px">
+      <span style="font-family:var(--font-heading);font-size:15px;letter-spacing:0.1em;color:var(--color-accent)">02</span>
+      <div>
+        <h2 style="margin:0 0 4px;font-size:clamp(28px,3.4vw,38px)">Arquitectura</h2>
+        <p style="margin:0;font-size:15px;max-width:66ch;color:var(--color-neutral-800)">La decisión más importante del proyecto: no todo pasa por un backend propio.</p>
+        <sc-if value="{{ showEnglish }}" hint-placeholder-val="{{ true }}">
+          <p style="margin:6px 0 0;font-size:13px;color:var(--color-accent-700)">Most reads and writes go straight from the browser to Postgres, authorised by row-level security instead of server logic.</p>
+        </sc-if>
+      </div>
+    </div>
+    <p style="margin:0 0 30px;max-width:78ch;text-wrap:pretty">La mayoría de las lecturas y escrituras van directo del navegador a <strong>Supabase</strong> (PostgreSQL + Auth), protegidas por <strong>Row Level Security</strong> a nivel de fila en la base — no por lógica de servidor. El backend en Node existe solo para lo que necesita un secreto de servidor o un rate-limit real: pagos, alta de administradores, formularios públicos y firma de subida de imágenes.</p>
+    <figure class="blueprint" style="position:relative;margin:0 0 30px;padding:0;background:#fff">
+      <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+      <img src="assets/images/DiagramaArquitectura.png" alt="Diagrama de arquitectura: navegador, Cloudflare Worker, frontend estático, Supabase, API Node, Cloudinary, Mercado Pago y Resend" style="display:block;width:100%;height:auto" loading="lazy">
+      <figcaption style="padding:10px 14px;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-accent-700);border-top:1px solid var(--color-divider)">Fig. 01 — Flujo de datos del sistema</figcaption>
+    </figure>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:22px">
+      <div>
+        <h4 style="margin:0 0 6px;font-size:19px">Frontend estático</h4>
+        <p style="margin:0;font-size:14px;color:var(--color-neutral-800)">HTML/CSS/JS vanilla, sin framework: marketplace público, panel del vendedor y panel de administración como tres apps que comparten un único cliente de Supabase.</p>
+      </div>
+      <div>
+        <h4 style="margin:0 0 6px;font-size:19px">Supabase · Postgres + RLS</h4>
+        <p style="margin:0;font-size:14px;color:var(--color-neutral-800)">El frontend consulta e inserta con la anon key — pensada para ser pública. Lo que autoriza o bloquea cada operación son las políticas de RLS y los triggers de la base.</p>
+      </div>
+      <div>
+        <h4 style="margin:0 0 6px;font-size:19px">API propia · Node/Express</h4>
+        <p style="margin:0;font-size:14px;color:var(--color-neutral-800)">En Render. Solo lo que RLS no puede resolver: usar una clave secreta de servidor, o limitar cuántas veces alguien puede escribir por hora.</p>
+      </div>
+      <div>
+        <h4 style="margin:0 0 6px;font-size:19px">Cloudflare Worker</h4>
+        <p style="margin:0;font-size:14px;color:var(--color-neutral-800)">Sirve el sitio y, si la URL es de una tienda, busca sus datos e inyecta meta tags y JSON-LD antes de responder: SEO por tienda sin migrar a un stack con SSR.</p>
+      </div>
+      <div>
+        <h4 style="margin:0 0 6px;font-size:19px">Cloudinary</h4>
+        <p style="margin:0;font-size:14px;color:var(--color-neutral-800)">El navegador sube la imagen directo con una firma de un solo uso que emite la API. El servidor nunca recibe el archivo: solo autoriza y aplica los límites del plan antes de firmar.</p>
+      </div>
+      <div>
+        <h4 style="margin:0 0 6px;font-size:19px">Mercado Pago · Resend</h4>
+        <p style="margin:0;font-size:14px;color:var(--color-neutral-800)">Cobro de planes y campañas con verificación de firma del webhook, y emails transaccionales: cartilla aprobada o rechazada, plan por vencer.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="producto" style="padding:48px 0;border-top:1px solid var(--color-divider)">
+    <div style="display:flex;gap:16px;align-items:baseline;margin-bottom:26px">
+      <span style="font-family:var(--font-heading);font-size:15px;letter-spacing:0.1em;color:var(--color-accent)">03</span>
+      <div>
+        <h2 style="margin:0 0 4px;font-size:clamp(28px,3.4vw,38px)">El producto</h2>
+        <p style="margin:0;font-size:15px;max-width:66ch;color:var(--color-neutral-800)">Tres superficies distintas sobre la misma base: el comprador, el vendedor y la moderación.</p>
+        <sc-if value="{{ showEnglish }}" hint-placeholder-val="{{ true }}">
+          <p style="margin:6px 0 0;font-size:13px;color:var(--color-accent-700)">Three surfaces over one schema: the buyer marketplace, the seller dashboard and the moderation panel.</p>
+        </sc-if>
+      </div>
+    </div>
+
+    <p style="margin:0 0 16px;font-family:var(--font-heading);font-size:13px;letter-spacing:0.14em;text-transform:uppercase;color:var(--color-accent-700)">A · Del lado del comprador</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:26px;margin-bottom:44px">
+      <article>
+        <figure class="blueprint" style="position:relative;margin:0 0 12px;padding:0;background:#fff">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <img src="assets/images/HomeMarketplaceSelectorDeLocalidad.png" alt="Marketplace con el selector de localidad abierto" style="display:block;width:100%;height:auto" loading="lazy">
+        </figure>
+        <h3 style="margin:0 0 4px;font-size:21px">Marketplace por localidad</h3>
+        <p style="margin:0 0 8px;font-size:14px;color:var(--color-neutral-800)">La localidad se elige una vez y queda guardada en el navegador; desde ahí se filtra todo: categoría, zona, búsqueda y grilla de tiendas. El selector solo lista ciudades que ya tienen al menos una tienda aprobada.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px"><span class="tag tag-accent">JavaScript</span><span class="tag tag-neutral">localStorage</span><span class="tag tag-neutral">Supabase RLS</span></div>
+      </article>
+      <article>
+        <figure class="blueprint" style="position:relative;margin:0 0 12px;padding:0;background:#fff">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <img src="assets/images/TiendaModalCatalogo.png" alt="Catálogo de una tienda con secciones, buscador y filtros por categoría" style="display:block;width:100%;height:auto" loading="lazy">
+        </figure>
+        <h3 style="margin:0 0 4px;font-size:21px">Ficha de tienda</h3>
+        <p style="margin:0 0 8px;font-size:14px;color:var(--color-neutral-800)">Se abre como una mini-web propia: galería, catálogo navegable por sección, favoritos y paginación de a 20 dentro de cada sección. La carga inicial reparte productos en round-robin entre secciones para que ninguna quede afuera.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px"><span class="tag tag-accent">JavaScript</span><span class="tag tag-neutral">Postgres RPC</span></div>
+      </article>
+      <article>
+        <figure class="blueprint" style="position:relative;margin:0 0 12px;padding:0;background:#fff">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <img src="assets/images/CarritoDeCompras.png" alt="Carrito de consulta con productos y total aproximado" style="display:block;width:100%;height:auto" loading="lazy">
+        </figure>
+        <h3 style="margin:0 0 4px;font-size:21px">Carrito de consulta</h3>
+        <p style="margin:0 0 8px;font-size:14px;color:var(--color-neutral-800)">No cobra: arma la lista con cantidades y total aproximado y la manda como mensaje de WhatsApp a la tienda. Si el comercio no tiene número cargado, la opción no se ofrece — nunca queda un callejón sin salida.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px"><span class="tag tag-accent">JavaScript</span><span class="tag tag-neutral">wa.me</span></div>
+      </article>
+    </div>
+
+    <p style="margin:0 0 16px;font-family:var(--font-heading);font-size:13px;letter-spacing:0.14em;text-transform:uppercase;color:var(--color-accent-700)">B · Panel del vendedor</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:26px;margin-bottom:44px">
+      <article>
+        <figure class="blueprint" style="position:relative;margin:0 0 12px;padding:0;background:#fff">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <img src="assets/images/Onboarding1.png" alt="Primer paso del alta: nombre del emprendimiento, rubro y WhatsApp" style="display:block;width:100%;height:auto" loading="lazy">
+        </figure>
+        <h3 style="margin:0 0 4px;font-size:21px">Alta en 4 pasos</h3>
+        <p style="margin:0 0 8px;font-size:14px;color:var(--color-neutral-800)">Nombre, rubro y WhatsApp alcanzan para crear la cartilla; el resto se completa después. Cada paso guarda solo, así que se puede abandonar y retomar sin perder nada.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px"><span class="tag tag-accent">JavaScript</span><span class="tag tag-neutral">Supabase Auth</span></div>
+      </article>
+      <article>
+        <figure class="blueprint" style="position:relative;margin:0 0 12px;padding:0;background:#fff">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <img src="assets/images/PanelPlanilla.png" alt="Vista planilla del catálogo con columnas editables" style="display:block;width:100%;height:auto" loading="lazy">
+        </figure>
+        <h3 style="margin:0 0 4px;font-size:21px">Catálogo en dos vistas</h3>
+        <p style="margin:0 0 8px;font-size:14px;color:var(--color-neutral-800)">Tarjetas para cargar de a uno, o una planilla tipo Excel para editar en masa, importar y exportar. El mismo editor se reusa en el panel de administración.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px"><span class="tag tag-accent">JavaScript</span><span class="tag tag-neutral">XLSX</span></div>
+      </article>
+      <article>
+        <figure class="blueprint" style="position:relative;margin:0 0 12px;padding:0;background:#fff">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <img src="assets/images/PanelActualizarPrecios.png" alt="Diálogo para actualizar precios en masa por porcentaje" style="display:block;width:100%;height:auto" loading="lazy">
+        </figure>
+        <h3 style="margin:0 0 4px;font-size:21px">Actualización masiva de precios</h3>
+        <p style="margin:0 0 8px;font-size:14px;color:var(--color-neutral-800)">Un porcentaje aplicado a todo el catálogo o a una categoría, con vista previa del resultado antes de confirmar. Los precios de oferta se ajustan en la misma proporción.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px"><span class="tag tag-accent">JavaScript</span><span class="tag tag-neutral">Postgres</span></div>
+      </article>
+      <article>
+        <figure class="blueprint" style="position:relative;margin:0 0 12px;padding:0;background:#fff">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <img src="assets/images/PanelQr.png" alt="Afiche imprimible con el QR de la tienda" style="display:block;width:100%;height:auto" loading="lazy">
+        </figure>
+        <h3 style="margin:0 0 4px;font-size:21px">QR para el local</h3>
+        <p style="margin:0 0 8px;font-size:14px;color:var(--color-neutral-800)">Genera un afiche listo para imprimir con un QR que apunta a un link corto y permanente, no al slug de la tienda: si mañana cambia el nombre, el papel impreso sigue funcionando.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px"><span class="tag tag-accent">Cloudflare Worker</span><span class="tag tag-neutral">html2canvas</span></div>
+      </article>
+      <article>
+        <figure class="blueprint" style="position:relative;margin:0 0 12px;padding:0;background:#fff">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <img src="assets/images/PanelPublicidad.png" alt="Panel de campañas de publicidad del vendedor" style="display:block;width:100%;height:auto" loading="lazy">
+        </figure>
+        <h3 style="margin:0 0 4px;font-size:21px">Campañas de publicidad</h3>
+        <p style="margin:0 0 8px;font-size:14px;color:var(--color-neutral-800)">El vendedor compra destacado o banner por días y localidades. El precio se calcula con la misma función de base que usa el panel de administración: una sola fuente de verdad.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px"><span class="tag tag-accent">Mercado Pago</span><span class="tag tag-neutral">Postgres function</span></div>
+      </article>
+      <article>
+        <figure class="blueprint" style="position:relative;margin:0 0 12px;padding:0;background:#fff">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <img src="assets/images/RegistroDeActividad.png" alt="Métricas de actividad de los últimos 30 días" style="display:block;width:100%;height:auto" loading="lazy">
+        </figure>
+        <h3 style="margin:0 0 4px;font-size:21px">Métricas propias</h3>
+        <p style="margin:0 0 8px;font-size:14px;color:var(--color-neutral-800)">Tracking propio de vistas, clics a WhatsApp y redes, búsquedas, compartidos y banners. Pasa por la API justamente por lo que se pierde al escribir directo a la base: rate-limit por IP (300 eventos cada 10 minutos) y CORS que acepta el dominio con y sin <code>www</code>. Los paneles leen de un agregado diario, no de la tabla cruda.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px"><span class="tag tag-accent">Node/Express</span><span class="tag tag-neutral">Postgres</span></div>
+      </article>
+    </div>
+
+    <p style="margin:0 0 16px;font-family:var(--font-heading);font-size:13px;letter-spacing:0.14em;text-transform:uppercase;color:var(--color-accent-700)">C · Administración y moderación</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:26px">
+      <article>
+        <figure class="blueprint" style="position:relative;margin:0 0 12px;padding:0;background:#fff">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <img src="assets/images/PanelAdmin.png" alt="Panel de administración con el listado de tiendas y sus estados" style="display:block;width:100%;height:auto" loading="lazy">
+        </figure>
+        <h3 style="margin:0 0 4px;font-size:21px">Panel de administración</h3>
+        <p style="margin:0 0 8px;font-size:14px;color:var(--color-neutral-800)">Tiendas, moderación, denuncias, solicitudes, localidades, categorías, publicidad, campañas y equipo. Los moderadores se limitan por localidad a cargo; los campos sensibles (plan, verificación, localidad) están protegidos por triggers en la base, no solo por la interfaz.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px"><span class="tag tag-accent">Supabase Admin API</span><span class="tag tag-neutral">Triggers</span></div>
+      </article>
+      <article>
+        <figure class="blueprint" style="position:relative;margin:0 0 12px;padding:0;background:#fff">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <img src="assets/images/AprobarRechazarTienda.png" alt="Cartillas pendientes de revisión con acciones aprobar, rechazar y editar" style="display:block;width:100%;height:auto" loading="lazy">
+        </figure>
+        <h3 style="margin:0 0 4px;font-size:21px">Cola de revisión</h3>
+        <p style="margin:0 0 8px;font-size:14px;color:var(--color-neutral-800)">Nada se publica sin aprobación. Aprobar o rechazar dispara un email transaccional con el motivo, y todo el texto cargado por usuarios se escapa antes de entrar al HTML del mail.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px"><span class="tag tag-accent">Resend</span><span class="tag tag-neutral">Node/Express</span></div>
+      </article>
+    </div>
+  </section>
+
+  <section id="decisiones" style="padding:48px 0;border-top:1px solid var(--color-divider)">
+    <div style="display:flex;gap:16px;align-items:baseline;margin-bottom:26px">
+      <span style="font-family:var(--font-heading);font-size:15px;letter-spacing:0.1em;color:var(--color-accent)">04</span>
+      <div>
+        <h2 style="margin:0 0 4px;font-size:clamp(28px,3.4vw,38px)">Decisiones técnicas</h2>
+        <p style="margin:0;font-size:15px;max-width:66ch;color:var(--color-neutral-800)">Cuatro decisiones concretas, con el motivo y el resultado de cada una.</p>
+        <sc-if value="{{ showEnglish }}" hint-placeholder-val="{{ true }}">
+          <p style="margin:6px 0 0;font-size:13px;color:var(--color-accent-700)">Four real trade-offs: the problem, the call I made, why, and what it changed.</p>
+        </sc-if>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:1px;background:var(--color-divider);border:1px solid var(--color-divider)">
+      <div style="background:var(--color-bg);padding:20px">
+        <h3 style="margin:0 0 14px;font-size:20px">CRUD directo a Postgres en vez de un backend que pase todo</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:18px">
+          <div><p style="margin:0 0 4px;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-accent-700)">Problema</p><p style="margin:0;font-size:14px">Un backend propio manejando cada lectura y escritura era un salto de red innecesario para operaciones simples, y más superficie de ataque que mantener.</p></div>
+          <div><p style="margin:0 0 4px;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-accent-700)">Decisión</p><p style="margin:0;font-size:14px">Mover el CRUD a Supabase directo desde el frontend, protegido por Row Level Security. El backend quedó solo para lo que necesita un secreto o rate-limit.</p></div>
+          <div><p style="margin:0 0 4px;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-accent-700)">Motivo</p><p style="margin:0;font-size:14px">Menos capas para lo simple, y un backend enfocado únicamente en lo sensible: pagos, alta de admins, formularios públicos, firma de imágenes.</p></div>
+          <div><p style="margin:0 0 4px;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-accent-700)">Resultado</p><p style="margin:0;font-size:14px">Backend más chico y fácil de auditar. La seguridad vive en un solo lugar: las políticas de RLS.</p></div>
+        </div>
+      </div>
+      <div style="background:var(--color-bg);padding:20px">
+        <h3 style="margin:0 0 14px;font-size:20px">Una sola cuenta de Cloudinary con subida firmada</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:18px">
+          <div><p style="margin:0 0 4px;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-accent-700)">Problema</p><p style="margin:0;font-size:14px">Cada vendedor pegaba la URL de su propia cuenta de Cloudinary: fricción en el alta y cero moderación real sobre lo publicado.</p></div>
+          <div><p style="margin:0 0 4px;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-accent-700)">Decisión</p><p style="margin:0;font-size:14px">Centralizar en una cuenta del proyecto, con subida firmada desde el navegador — el servidor emite la firma y nunca recibe el archivo.</p></div>
+          <div><p style="margin:0 0 4px;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-accent-700)">Motivo</p><p style="margin:0;font-size:14px">Onboarding sin fricción y control real: las imágenes viven en una carpeta por tienda y nadie las reemplaza después de aprobadas.</p></div>
+          <div><p style="margin:0 0 4px;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-accent-700)">Resultado</p><p style="margin:0;font-size:14px">Subida en un clic. El tamaño máximo va <em>dentro</em> de la firma, así que lo rechaza Cloudinary mismo: deja de ser un límite que dependa de que el navegador coopere.</p></div>
+        </div>
+      </div>
+      <div style="background:var(--color-bg);padding:20px">
+        <h3 style="margin:0 0 14px;font-size:20px">SEO por tienda resuelto en el edge</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:18px">
+          <div><p style="margin:0 0 4px;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-accent-700)">Problema</p><p style="margin:0;font-size:14px">El sitio es una SPA sin SSR, y cada tienda necesitaba su propia página indexable con meta tags y datos estructurados propios.</p></div>
+          <div><p style="margin:0 0 4px;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-accent-700)">Decisión</p><p style="margin:0;font-size:14px">Un Cloudflare Worker intercepta la request, busca los datos de la tienda en Supabase e inyecta el <code>&lt;head&gt;</code> antes de responder.</p></div>
+          <div><p style="margin:0 0 4px;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-accent-700)">Motivo</p><p style="margin:0;font-size:14px">Evitar reescribir todo el frontend en otro stack solo para tener SEO por tienda.</p></div>
+          <div><p style="margin:0 0 4px;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-accent-700)">Resultado</p><p style="margin:0;font-size:14px">Cada tienda se indexa individualmente, con OpenGraph y JSON-LD, sin cambiar de stack.</p></div>
+        </div>
+      </div>
+      <div style="background:var(--color-bg);padding:20px">
+        <h3 style="margin:0 0 14px;font-size:20px">Webhook de pagos verificado y fail-closed</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:18px">
+          <div><p style="margin:0 0 4px;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-accent-700)">Problema</p><p style="margin:0;font-size:14px">Los IDs de pago de Mercado Pago no son secretos: cualquiera podía golpear el webhook con un ID real y forzar una confirmación falsa.</p></div>
+          <div><p style="margin:0 0 4px;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-accent-700)">Decisión</p><p style="margin:0;font-size:14px">Verificar la firma HMAC-SHA256 de cada notificación con comparación de tiempo constante, y no procesar nada si falta el secreto.</p></div>
+          <div><p style="margin:0 0 4px;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-accent-700)">Motivo</p><p style="margin:0;font-size:14px">Un webhook sin verificar es, en la práctica, un endpoint público para extender el vencimiento de un plan sin pagar.</p></div>
+          <div><p style="margin:0 0 4px;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-accent-700)">Resultado</p><p style="margin:0;font-size:14px">Solo Mercado Pago puede disparar una confirmación real, el monto se valida contra el precio del plan y el <code>payment_id</code> queda registrado como único: el mismo pago nunca acredita dos veces.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="datos" style="padding:48px 0;border-top:1px solid var(--color-divider)">
+    <div style="display:flex;gap:16px;align-items:baseline;margin-bottom:26px">
+      <span style="font-family:var(--font-heading);font-size:15px;letter-spacing:0.1em;color:var(--color-accent)">05</span>
+      <div>
+        <h2 style="margin:0 0 4px;font-size:clamp(28px,3.4vw,38px)">Modelo de datos</h2>
+        <p style="margin:0;font-size:15px;max-width:66ch;color:var(--color-neutral-800)">Unas 30 tablas en Postgres. Como el frontend escribe directo, el esquema es el contrato: lo que no debe pasar, no pasa a nivel de fila.</p>
+        <sc-if value="{{ showEnglish }}" hint-placeholder-val="{{ true }}">
+          <p style="margin:6px 0 0;font-size:13px;color:var(--color-accent-700)">~30 tables. With the browser writing straight to Postgres, the schema is the contract — constraints, triggers and RLS do the enforcing, not the form.</p>
+        </sc-if>
+      </div>
+    </div>
+    <div style="overflow-x:auto;margin-bottom:34px">
+      <table class="table" style="min-width:640px">
+        <thead>
+          <tr><th>Tabla</th><th>Qué resuelve</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>tiendas</code></td><td>La cartilla: plan, estado de revisión, límites propios por override, borrado lógico y coordenadas para el mapa.</td></tr>
+          <tr><td><code>tienda_revisiones</code></td><td>Los cambios sensibles se guardan como propuesta en <code>jsonb</code> y esperan aprobación — la tienda publicada no se toca mientras tanto.</td></tr>
+          <tr><td><code>productos</code> · <code>tienda_secciones</code></td><td>Catálogo con oferta, stock, destacados y secciones propias de cada tienda; <code>deleted_at</code> en vez de borrar.</td></tr>
+          <tr><td><code>planes</code> · <code>historial_planes</code></td><td>Los límites del plan son columnas (fotos, productos, link web, estadísticas), no constantes en el código. El historial deja el rastro de cada período pagado.</td></tr>
+          <tr><td><code>paquetes_publicidad</code> · <code>campanias</code></td><td>Publicidad por tipo, días y localidades, con un multiplicador de precio por ciudad en <code>localidades</code>.</td></tr>
+          <tr><td><code>eventos</code> · <code>eventos_diarios</code></td><td>Evento crudo para auditar, y un agregado por día/tipo/tienda con clave compuesta para que los paneles no escaneen la tabla entera.</td></tr>
+          <tr><td><code>admins</code> · <code>admin_localidades</code></td><td>Superadmin y moderadores, con el alcance de cada moderador limitado a sus localidades a cargo.</td></tr>
+          <tr><td><code>pagos_procesados</code></td><td><code>mercadopago_payment_id</code> con índice único: el mismo pago no se puede acreditar dos veces, aunque el webhook llegue repetido.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin:0 0 16px;font-family:var(--font-heading);font-size:13px;letter-spacing:0.14em;text-transform:uppercase;color:var(--color-accent-700)">El esquema como contrato</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:22px">
+      <div>
+        <h4 style="margin:0 0 6px;font-size:19px">Validación en la base</h4>
+        <p style="margin:0;font-size:14px;color:var(--color-neutral-800)">Toda columna de URL pasa por un <code>CHECK es_url_http()</code>, los slugs por <code>slug_valido()</code>, los puntajes viven entre 1 y 5 y los comentarios topan en 500 caracteres. Si el navegador escribe directo, la validación tiene que estar acá.</p>
+      </div>
+      <div>
+        <h4 style="margin:0 0 6px;font-size:19px">Triggers para lo sensible</h4>
+        <p style="margin:0;font-size:14px;color:var(--color-neutral-800)">Plan, verificación y localidad no se pueden editar desde una sesión de vendedor: un trigger revierte el cambio si la identidad de la sesión no es un admin real.</p>
+      </div>
+      <div>
+        <h4 style="margin:0 0 6px;font-size:19px">Idempotencia del pago</h4>
+        <p style="margin:0;font-size:14px;color:var(--color-neutral-800)">La confirmación de un plan es una función de base que valida el monto contra el precio real y registra el <code>payment_id</code>: reintentos y notificaciones duplicadas de Mercado Pago no acreditan dos veces.</p>
+      </div>
+      <div>
+        <h4 style="margin:0 0 6px;font-size:19px">Nada se manda dos veces</h4>
+        <p style="margin:0;font-size:14px;color:var(--color-neutral-800)"><code>notificaciones_log</code> guarda el día de envío, así el cron de "plan por vencer" no le escribe al mismo emprendedor dos veces por día.</p>
+      </div>
+      <div>
+        <h4 style="margin:0 0 6px;font-size:19px">Borrado lógico</h4>
+        <p style="margin:0;font-size:14px;color:var(--color-neutral-800)">Tiendas y productos se dan de baja con <code>deleted_at</code>. Las métricas históricas y los pagos siguen teniendo a qué apuntar.</p>
+      </div>
+      <div>
+        <h4 style="margin:0 0 6px;font-size:19px">Multi-localidad</h4>
+        <p style="margin:0;font-size:14px;color:var(--color-neutral-800)">Una tienda vive en una localidad, y puede aparecer en más como opción paga vía <code>tienda_localidades</code> — sin duplicar la cartilla ni el catálogo.</p>
+      </div>
+    </div>
+  </section>
+
+  <sc-if value="{{ showTechEvidence }}" hint-placeholder-val="{{ true }}">
+  <section id="evidencia" style="padding:48px 0;border-top:1px solid var(--color-divider)">
+    <div style="display:flex;gap:16px;align-items:baseline;margin-bottom:26px">
+      <span style="font-family:var(--font-heading);font-size:15px;letter-spacing:0.1em;color:var(--color-accent)">06</span>
+      <div>
+        <h2 style="margin:0 0 4px;font-size:clamp(28px,3.4vw,38px)">Evidencia técnica</h2>
+        <p style="margin:0;font-size:15px;max-width:66ch;color:var(--color-neutral-800)">Consultas reales sobre la base de producción, un bug real y la estructura de los dos repos.</p>
+        <sc-if value="{{ showEnglish }}" hint-placeholder-val="{{ true }}">
+          <p style="margin:6px 0 0;font-size:13px;color:var(--color-accent-700)">Queries against the production database, a real bug, and the repo layout.</p>
+        </sc-if>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:26px;margin-bottom:40px">
+      <article>
+        <figure class="blueprint" style="position:relative;margin:0 0 10px;padding:0;background:#1d1f20">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <img src="assets/images/SQL-tiendas.png" alt="Consulta SQL de tiendas con localidad, provincia, plan y conteo de productos" style="display:block;width:100%;height:auto" loading="lazy">
+        </figure>
+        <p style="margin:0 0 2px;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-accent-700)">Base de datos</p>
+        <p style="margin:0;font-family:var(--font-heading);font-size:18px">Tiendas por localidad y plan, con productos visibles y destacados</p>
+      </article>
+      <article>
+        <figure class="blueprint" style="position:relative;margin:0 0 10px;padding:0;background:#1d1f20">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <img src="assets/images/SQL-productos.png" alt="Consulta SQL que cuenta productos activos por tienda" style="display:block;width:100%;height:auto" loading="lazy">
+        </figure>
+        <p style="margin:0 0 2px;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-accent-700)">Base de datos</p>
+        <p style="margin:0;font-family:var(--font-heading);font-size:18px">Productos activos por tienda, con borrado lógico respetado</p>
+      </article>
+      <article>
+        <figure class="blueprint" style="position:relative;margin:0 0 10px;padding:0;background:#1d1f20">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <img src="assets/images/SQL-descuentos.png" alt="Consulta SQL que calcula el porcentaje de descuento de los productos en oferta" style="display:block;width:100%;height:auto" loading="lazy">
+        </figure>
+        <p style="margin:0 0 2px;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-accent-700)">Base de datos</p>
+        <p style="margin:0;font-family:var(--font-heading);font-size:18px">Descuento calculado por producto en oferta</p>
+      </article>
+      <article>
+        <figure class="blueprint" style="position:relative;margin:0 0 10px;padding:0;background:#fff">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <img src="assets/images/ErrorFirmaCloudinary.png" alt="Error de firma inválida devuelto por Cloudinary durante una subida" style="display:block;width:100%;height:auto" loading="lazy">
+        </figure>
+        <p style="margin:0 0 2px;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-accent-700)">Bug real en producción</p>
+        <p style="margin:0 0 6px;font-family:var(--font-heading);font-size:18px">Cloudinary rechazaba la firma y no se podía subir ninguna foto</p>
+        <p style="margin:0;font-size:14px;color:var(--color-neutral-800)">La firma se calculaba sobre un set de parámetros distinto al que el navegador terminaba enviando. Se alineó el string firmado con el request real y se agregó el límite de tamaño antes de firmar.</p>
+      </article>
+    </div>
+    <p style="margin:0 0 12px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-accent-700)">Estructura real — dos repos: el sitio estático y la API privilegiada</p>
+    <div class="blueprint" style="position:relative;padding:18px;background:var(--color-neutral-100);overflow:auto">
+      <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+      <pre style="margin:0;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;line-height:1.7">shoppingonline-web/            <span style="color:var(--color-neutral-600)"># sitio estático, Cloudflare Workers</span>
+├── js/
+│   ├── marketplace.js         <span style="color:var(--color-neutral-600)"># sitio público: filtros y grilla</span>
+│   ├── tienda-modal.js        <span style="color:var(--color-neutral-600)"># ficha de tienda, carrito de consulta</span>
+│   ├── productos-editor.js    <span style="color:var(--color-neutral-600)"># compartido: panel + admin</span>
+│   ├── productos-planilla.js  <span style="color:var(--color-neutral-600)"># vista tipo Excel del catálogo</span>
+│   ├── supabaseClient.js      <span style="color:var(--color-neutral-600)"># cliente único, anon key pública</span>
+│   └── config.js              <span style="color:var(--color-neutral-600)"># URLs por entorno</span>
+├── panel/                     <span style="color:var(--color-neutral-600)"># panel del vendedor</span>
+├── admin/                     <span style="color:var(--color-neutral-600)"># panel de administración</span>
+├── css/site/                  <span style="color:var(--color-neutral-600)"># estilos por módulo, numerados</span>
+├── worker.js                  <span style="color:var(--color-neutral-600)"># edge: SEO por tienda, sitemap, headers</span>
+└── wrangler.jsonc
+
+shopping-api/                  <span style="color:var(--color-neutral-600)"># Node/Express, Render — solo lo privilegiado</span>
+├── routes/
+│   ├── pagos.js               <span style="color:var(--color-neutral-600)"># preferencia + webhook Mercado Pago</span>
+│   ├── admins.js              <span style="color:var(--color-neutral-600)"># alta/baja de equipo (Supabase Admin API)</span>
+│   ├── imagenes.js            <span style="color:var(--color-neutral-600)"># firma de subida a Cloudinary</span>
+│   ├── denuncias.js           <span style="color:var(--color-neutral-600)"># público, con rate limit</span>
+│   ├── eventos.js             <span style="color:var(--color-neutral-600)"># tracking, con rate limit</span>
+│   └── notificaciones.js      <span style="color:var(--color-neutral-600)"># emails transaccionales (cron)</span>
+├── utils/
+│   ├── supabaseAdmin.js       <span style="color:var(--color-neutral-600)"># cliente service_role — bypasea RLS</span>
+│   └── mercadopago.js         <span style="color:var(--color-neutral-600)"># verificación de firma del webhook</span>
+├── test/                      <span style="color:var(--color-neutral-600)"># vitest: validación y firma de webhook</span>
+└── server.js</pre>
+    </div>
+  </section>
+  </sc-if>
+
+  <sc-if value="{{ showRoblox }}" hint-placeholder-val="{{ true }}">
+  <section id="otros" style="padding:48px 0;border-top:1px solid var(--color-divider)">
+    <div style="display:flex;gap:16px;align-items:baseline;margin-bottom:26px">
+      <span style="font-family:var(--font-heading);font-size:15px;letter-spacing:0.1em;color:var(--color-accent)">07</span>
+      <div>
+        <h2 style="margin:0 0 4px;font-size:clamp(28px,3.4vw,38px)">Otro proyecto</h2>
+        <p style="margin:0;font-size:15px;max-width:66ch;color:var(--color-neutral-800)">Un proyecto hobby que muestra el mismo criterio de arquitectura: un sistema sirviendo N instancias por identidad de usuario.</p>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:30px;align-items:start">
+      <figure class="blueprint" style="position:relative;margin:0;padding:0">
+        <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+        <img src="assets/images/AdventureIslands.png" alt="Captura del juego Adventure Islands en Roblox: islas flotantes conectadas por puentes" style="display:block;width:100%;height:auto" loading="lazy">
+      </figure>
+      <div>
+        <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;margin-bottom:8px">
+          <h3 style="margin:0;font-size:26px">Adventure Islands</h3>
+          <span class="tag tag-outline">Activo</span>
+        </div>
+        <p style="margin:0 0 12px;font-size:14px;color:var(--color-neutral-800)">Juego multijugador para Roblox (hasta 8 jugadores): cada uno recibe una isla propia con construcción, progreso y persistencia. Un solo sistema administra las N bases por <code>UserId</code> en vez de duplicar lógica por isla, con separación cliente/servidor y estado guardado entre sesiones.</p>
+        <sc-if value="{{ showEnglish }}" hint-placeholder-val="{{ true }}">
+          <p style="margin:0 0 12px;font-size:13px;color:var(--color-accent-700);border-left:2px solid var(--color-accent);padding-left:12px">Multiplayer Roblox game: one system serves N per-player islands keyed by UserId, with server-authoritative logic and persistent state.</p>
+        </sc-if>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px"><span class="tag tag-accent">Lua / Luau</span><span class="tag tag-accent">Roblox Studio</span><span class="tag tag-accent">DataStoreService</span></div>
+        <a href="https://www.roblox.com/es/games/121759150849279/Adventure-Islands" target="_blank" rel="noopener" style="font-family:var(--font-heading);font-size:15px;letter-spacing:0.04em;text-transform:uppercase">Ver el juego ↗</a>
+      </div>
+    </div>
+  </section>
+  </sc-if>
+
+  <section id="contacto" style="padding:48px 0 60px;border-top:1px solid var(--color-divider)">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:34px;align-items:start">
+      <div>
+        <h2 style="margin:0 0 10px;font-size:clamp(28px,3.4vw,38px)">Trabajemos juntos</h2>
+        <p style="margin:0 0 10px;max-width:46ch">Busco sumarme a un equipo donde pueda seguir tocando todo el stack. Si tenés algo en mente, escribime — no hace falta que esté definido.</p>
+        <sc-if value="{{ showEnglish }}" hint-placeholder-val="{{ true }}">
+          <p style="margin:0;max-width:46ch;font-size:14px;color:var(--color-accent-700)">Open to full-stack roles. Happy to walk through any part of this system in detail.</p>
+        </sc-if>
+      </div>
+      <dl style="display:grid;gap:1px;margin:0;background:var(--color-divider);border:1px solid var(--color-divider)">
+        <div style="display:flex;flex-wrap:wrap;gap:4px 16px;justify-content:space-between;background:var(--color-bg);padding:14px 16px">
+          <dt style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-accent-700)">Email</dt>
+          <dd style="margin:0"><a href="mailto:romero.mauro.a11@gmail.com">romero.mauro.a11@gmail.com</a></dd>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px 16px;justify-content:space-between;background:var(--color-bg);padding:14px 16px">
+          <dt style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-accent-700)">Sitio en vivo</dt>
+          <dd style="margin:0"><a href="https://shoppingonlinesn.com" target="_blank" rel="noopener">shoppingonlinesn.com ↗</a></dd>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px 16px;justify-content:space-between;background:var(--color-bg);padding:14px 16px">
+          <dt style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-accent-700)">GitHub</dt>
+          <dd style="margin:0"><a href="https://github.com/romeromauro11" target="_blank" rel="noopener">github.com/romeromauro11</a></dd>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px 16px;justify-content:space-between;background:var(--color-bg);padding:14px 16px">
+          <dt style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-accent-700)">Ubicación</dt>
+          <dd style="margin:0;font-size:14px">San Nicolás de los Arroyos, Buenos Aires</dd>
+        </div>
+      </dl>
+    </div>
+    <p style="margin:40px 0 0;padding-top:16px;border-top:1px solid var(--color-divider);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-neutral-600)">Mauro Agustín Romero — Caso de estudio ShoppingOnline · 2026</p>
+  </section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showEnglish&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Contenido&quot;},&quot;showTechEvidence&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Contenido&quot;},&quot;showRoblox&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Contenido&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      showEnglish: this.props.showEnglish ?? true,
+      showTechEvidence: this.props.showTechEvidence ?? true,
+      showRoblox: this.props.showRoblox ?? true,
+    };
+  }
+}
+</script>
+</body>
+</html>
